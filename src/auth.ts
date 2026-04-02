@@ -22,9 +22,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: "/admin/login",
   },
-  callbacks: {
-    authorized: async ({ auth }) => {
-      return !!auth;
-    },
+  session: {
+    strategy: "jwt",
   },
+  secret: process.env.AUTH_SECRET,
 });
