@@ -13,8 +13,7 @@ export default async function LoginPage({
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
       <div className="white-panel" style={{ width: '100%', maxWidth: '400px' }}>
         <h2 style={{ color: '#7f1d1d', marginTop: 0 }}>Вход для администратора</h2>
-        <p style={{ color: '#64748b', fontSize: '14px' }}>Логин: <strong>admin</strong> / Пароль: <strong>FarovonAdmin123</strong></p>
-        <form
+                <form
           action={async (formData) => {
             "use server"
             try {
