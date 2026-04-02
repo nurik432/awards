@@ -1,51 +1,51 @@
-import { prisma } from '@/lib/prisma';
-import AdminApplicationRow from '@/components/AdminApplicationRow';
+import { signIn } from "@/auth"
+import { AuthError } from "next-auth"
 
-export default async function AdminDashboard() {
-  const applications = await prisma.application.findMany({
-    include: { nomination: true },
-    orderBy: { submittedAt: 'desc' }
-  });
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ callbackUrl?: string; error?: string }>
+}) {
+  const params = await searchParams;
+  const errorMessage = params?.error === "CredentialsSignin" ? "Неверные данные для входа." : null;
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <div>
-           <h2 style={{ fontSize: '32px', color: '#111827', margin: 0 }}>Заявки на участие</h2>
-           <p style={{ color: '#64748b', margin: '8px 0 0' }}>Просмотр и подтверждение номинаций от сотрудников</p>
-        </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
-           <a href="/admin/winners" className="btn btn-secondary" style={{ color: '#7f1d1d', borderColor: '#7f1d1d' }}>Победители</a>
-           <a href="/admin/nominations" className="btn btn-secondary" style={{ color: '#7f1d1d', borderColor: '#7f1d1d' }}>Номинации</a>
-        </div>
-      </div>
-
-      <div className="white-panel" style={{ padding: 0, overflow: 'hidden' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
-            <tr>
-              <th style={{ padding: '20px 15px', textAlign: 'left', fontSize: '13px', color: '#64748b' }}>Сотрудник</th>
-              <th style={{ padding: '20px 15px', textAlign: 'left', fontSize: '13px', color: '#64748b' }}>Номинация</th>
-              <th style={{ padding: '20px 15px', textAlign: 'left', fontSize: '13px', color: '#64748b' }}>Описание</th>
-              <th style={{ padding: '20px 15px', textAlign: 'left', fontSize: '13px', color: '#64748b' }}>Статус</th>
-              <th style={{ padding: '20px 15px', textAlign: 'left', fontSize: '13px', color: '#64748b' }}>Отправлено</th>
-              <th style={{ padding: '20px 15px', textAlign: 'right', fontSize: '13px', color: '#64748b' }}>Управление</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map((app: any) => (
-               <AdminApplicationRow key={app.id} app={app} />
-            ))}
-            {applications.length === 0 && (
-               <tr>
-                 <td colSpan={6} style={{ padding: '60px', textAlign: 'center', color: '#64748b' }}>
-                    Заявок пока нет.
-                 </td>
-               </tr>
-            )}
-          </tbody>
-        </table>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+      <div className="white-panel" style={{ width: '100%', maxWidth: '400px' }}>
+        <h2 style={{ color: '#7f1d1d', marginTop: 0 }}>Вход для администратора</h2>
+        <form
+          action={async (formData) => {
+            "use server"
+            try {
+              await signIn("credentials", formData)
+            } catch (error) {
+              if (error instanceof AuthError) {
+                // handle
+              }
+              throw error;
+            }
+          }}
+          className="form-field"
+        >
+          <div style={{ marginBottom: '14px' }}>
+            <label htmlFor="username">Логин</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div style={{ marginBottom: '14px' }}>
+            <label htmlFor="password">Пароль</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          {errorMessage && (
+            <div className="form-note" style={{ color: 'red', borderColor: 'red' }}>
+              {errorMessage}
+            </div>
+          )}
+          <div style={{ display: 'none' }}>
+            <input type="hidden" name="redirectTo" value={params?.callbackUrl || "/admin"} />
+          </div>
+          <button type="submit" className="apply-btn" style={{ width: '100%', marginTop: '10px' }}>Войти</button>
+        </form>
       </div>
     </div>
-  );
+  )
 }
