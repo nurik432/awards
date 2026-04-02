@@ -1,24 +1,24 @@
-import { auth } from "@/auth"
-import { NextResponse } from "next/server"
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export default auth((req) => {
-  const isLoggedIn = !!req.auth
-  const isOnAdmin = req.nextUrl.pathname.startsWith('/admin')
-  const isOnLogin = req.nextUrl.pathname === '/admin/login'
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
 
-  if (isOnAdmin && !isOnLogin) {
-    if (!isLoggedIn) {
-      return NextResponse.redirect(new URL('/admin/login', req.nextUrl))
-    }
+  // Пропускаем страницу логина
+  if (pathname === '/admin/login') {
+    return NextResponse.next()
   }
 
-  if (isOnLogin && isLoggedIn) {
-    return NextResponse.redirect(new URL('/admin', req.nextUrl))
+  // Проверяем сессию — замени 'admin_token' на название своей куки
+  const token = request.cookies.get('admin_token')?.value
+
+  if (!token) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
   return NextResponse.next()
-})
+}
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/admin/:path*'],
 }
