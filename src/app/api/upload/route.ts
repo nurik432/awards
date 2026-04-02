@@ -1,10 +1,6 @@
 import { NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 
-const UPLOAD_DIR = join(process.cwd(), 'public', 'uploads');
-const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_SIZE = 2 * 1024 * 1024; // 2 MB (better for base64 storage)
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
 
 export async function POST(request: Request) {
@@ -25,27 +21,20 @@ export async function POST(request: Request) {
 
     if (file.size > MAX_SIZE) {
       return NextResponse.json(
-        { error: 'Файл слишком большой (макс. 5 МБ)' },
+        { error: 'Файл слишком большой для хранения в базе (макс. 2 МБ)' },
         { status: 400 }
       );
     }
 
-    // Ensure upload directory exists
-    if (!existsSync(UPLOAD_DIR)) {
-      await mkdir(UPLOAD_DIR, { recursive: true });
-    }
+    // Convert file to Base64
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const base64 = buffer.toString('base64');
+    
+    // Create data URL
+    const dataUrl = `data:${file.type};base64,${base64}`;
 
-    // Generate unique filename
-    const ext = file.name.split('.').pop() || 'jpg';
-    const uniqueName = `${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${ext}`;
-    const filePath = join(UPLOAD_DIR, uniqueName);
-
-    // Write file
-    const bytes = await file.arrayBuffer();
-    await writeFile(filePath, Buffer.from(bytes));
-
-    const url = `/uploads/${uniqueName}`;
-    return NextResponse.json({ success: true, url });
+    return NextResponse.json({ success: true, url: dataUrl });
   } catch (error: any) {
     console.error('Upload error:', error);
     return NextResponse.json({ error: error.message }, { status: 500 });
