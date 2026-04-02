@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Nomination {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  icon          String?
+  description   String
+  criteria      String   // stored as JSON array string
+  steps         String   // stored as JSON array string
+  tags          String   // stored as JSON array string
+  formType      String   @default("basic") // "basic", "innovator", "manager"
+  googleFormUrl String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  applications  Application[]
+  winners       Winner[]
+}
+
+model Application {
+  id            String     @id @default(cuid())
+  nominationId  String
+  nomination    Nomination @relation(fields: [nominationId], references: [id], onDelete: Cascade)
+  employeeData  String     // JSON string: name, email, department, position, phone (basic)
+  formData      String     // JSON string: answers to nomination-specific questions
+  status        String     @default("PENDING") // "PENDING", "REVIEW", "APPROVED", "REJECTED"
+  submittedAt   DateTime   @default(now())
+  reviewNote    String?
+}
+
+model Winner {
+  id            String     @id @default(cuid())
+  name          String
+  department    String
+  position      String
+  nominationId  String
+  nomination    Nomination @relation(fields: [nominationId], references: [id], onDelete: Cascade)
+  subNomination String?
+  year          Int
+  photo         String?
+}
+
+model Gallery {
+  id         String   @id @default(cuid())
+  url        String
+  alt        String?
+  album      String?
+  orderIndex Int      @default(0)
+  isVisible  Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+
+model HeroSlide {
+  id         String   @id @default(cuid())
+  imageUrl   String
+  orderIndex Int      @default(0)
+  isActive   Boolean  @default(true)
+}
+
+model SiteContent {
+  key   String @id
+  value String
+}
+
+model User {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  password   String   
+  department String?
+  role       String   @default("EMPLOYEE") // "EMPLOYEE", "ADMIN", "JUDGE"
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}

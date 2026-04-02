@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Farovon Awards</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background:
+    linear-gradient(rgba(120,0,0,0.85), rgba(120,0,0,0.9))
+     center/cover no-repeat fixed;
+}
+.wrapper { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 72px 0 48px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+}
+.badge {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  font-size: 14px;
+}
+h1 {
+  margin: 18px 0 0;
+  color: white;
+  font-size: 58px;
+  line-height: 1.05;
+}
+.hero p {
+  color: #ffe6e6;
+  font-size: 20px;
+  line-height: 1.8;
+  max-width: 760px;
+}
+.actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 18px;
+  padding: 14px 22px;
+  font-weight: 700;
+}
+.btn-primary { background: #fff; color: #991b1b; }
+.btn-secondary {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.26);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.stat {
+  border-radius: 28px;
+  padding: 26px;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.16);
+  backdrop-filter: blur(10px);
+}
+.stat-value { font-size: 42px; font-weight: 800; }
+.stat-label { margin-top: 8px; color: #ffe4e4; }
+
+.white-panel {
+  background: rgba(255,255,255,0.96);
+  border-radius: 34px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 20px;
+}
+.info-box {
+  background: #fef2f2;
+  border-radius: 24px;
+  padding: 24px;
+}
+.info-box h2 {
+  margin: 0 0 12px;
+  color: #7f1d1d;
+  font-size: 24px;
+}
+.info-box p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+}
+.section-title {
+  margin: 52px 0 24px;
+  color: white;
+}
+.section-title .kicker {
+  font-size: 13px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #fecaca;
+  font-weight: 700;
+}
+.section-title h2 {
+  margin: 10px 0 0;
+  font-size: 42px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 22px;
+}
+.card {
+  background: rgba(255,255,255,0.96);
+  border-radius: 34px;
+  padding: 26px;
+  box-shadow: 0 18px 52px rgba(0,0,0,0.14);
+}
+.card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.icon {
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  border-radius: 18px;
+  background: #fee2e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+.card h3 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+}
+.desc {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #475569;
+}
+.block {
+  margin-top: 18px;
+}
+.block h4 {
+  margin: 0 0 10px;
+  color: #991b1b;
+  font-size: 15px;
+}
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li, ol li {
+  display: flex;
+  gap: 10px;
+  margin: 9px 0;
+  line-height: 1.6;
+  font-size: 14px;
+  color: #475569;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 9px;
+  border-radius: 50%;
+  background: #dc2626;
+  flex: 0 0 8px;
+}
+.num {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #b91c1c;
+  color: white;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex: 0 0 24px;
+  margin-top: 1px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid #fecaca;
+  font-size: 12px;
+  color: #475569;
+}
+
+.process {
+  margin: 56px 0 64px;
+}
+.process-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+.steps .step {
+  display: flex;
+  gap: 14px;
+  background: #fef2f2;
+  border-radius: 22px;
+  padding: 16px;
+  margin-top: 14px;
+}
+.step-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 16px;
+  background: #b91c1c;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  flex: 0 0 40px;
+}
+.gradient-panel {
+  border-radius: 30px;
+  padding: 30px;
+  color: white;
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+}
+.gradient-panel h3 {
+  margin-top: 0;
+  font-size: 30px;
+}
+.gradient-item {
+  margin-top: 12px;
+  border-radius: 18px;
+  padding: 15px 16px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+}
+footer {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  background: rgba(69,10,10,0.82);
+}
+footer .wrapper {
+  padding-top: 22px;
+  padding-bottom: 22px;
+  color: #fee2e2;
+  font-size: 14px;
+}
+
+@media (max-width: 1050px) {
+  .hero-grid, .process-grid, .info-grid, .cards { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .hero-grid, .process-grid, .info-grid, .cards, .stats { grid-template-columns: 1fr; }
+  h1 { font-size: 40px; }
+  .section-title h2 { font-size: 32px; }
+  .card h3 { font-size: 24px; }
+  .wrapper { padding: 0 16px; }
+  .hero { padding-top: 40px; }
+}
+
+/* Added winners archive + application form */
+.archive-panel, .form-panel {
+  margin-top: 26px;
+  border-radius: 28px;
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(248,113,113,0.18);
+  box-shadow: 0 18px 40px rgba(127,29,29,0.08);
+}
+.archive-inner, .form-inner {
+  padding: 30px;
+}
+.archive-tools {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  gap: 14px;
+  margin: 22px 0 24px;
+}
+.archive-tools input, .archive-tools select
+.form-grid input, .form-grid select, .form-grid textarea {
+  width: 100%;
+  border: 1px solid #fecaca;
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font: inherit;
+  color: #111827;
+  outline: none;
+}
+.archive-tools input:focus, .archive-tools select:focus
+.form-grid input:focus, .form-grid select:focus, .form-grid textarea:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 4px rgba(220,38,38,0.12);
+}
+.archive-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.archive-stat {
+  background: linear-gradient(135deg, rgba(127,29,29,0.08), rgba(248,113,113,0.16));
+  border: 1px solid rgba(220,38,38,0.12);
+  border-radius: 20px;
+  padding: 18px;
+}
+.archive-stat .value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #991b1b;
+}
+.archive-stat .label {
+  font-size: 13px;
+  color: #7f1d1d;
+  margin-top: 6px;
+}
+.winner-group {
+  border: 1px solid rgba(220,38,38,0.12);
+  border-radius: 22px;
+  background: #fff;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.winner-group summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(127,29,29,0.08), rgba(255,255,255,0.96));
+}
+.winner-group summary::-webkit-details-marker { display:none; }
+.winner-group summary h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #7f1d1d;
+}
+.winner-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 42px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #b91c1c;
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+}
+.group-note {
+  color: #7f1d1d;
+  font-size: 14px;
+}
+.table-wrap {
+  padding: 0 22px 22px;
+  overflow-x: auto;
+}
+.winners-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+.winners-table th, .winners-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #fee2e2;
+  text-align: left;
+  vertical-align: top;
+}
+.winners-table th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #991b1b;
+  background: #fff5f5;
+}
+.winners-table td:first-child, .winners-table th:first-child {
+  width: 70px;
+  text-align: center;
+}
+.winners-table tr:last-child td { border-bottom: none; }
+.winners-table tbody tr:hover { background: #fff7f7; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-grid .full { grid-column: 1 / -1; }
+.form-note {
+  margin-top: 14px;
+  color: #7f1d1d;
+  font-size: 14px;
+}
+.demo-submit {
+  border: none;
+  border-radius: 16px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #991b1b, #dc2626);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+.muted-chip {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .archive-stats { grid-template-columns: 1fr 1fr; }
+  .archive-tools, .form-grid { grid-template-columns: 1fr; }
+}
+
+
+.winners-hidden { display: none; }
+
+.site-topbar {
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  margin-bottom:28px; padding:16px 22px; border-radius:28px;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); backdrop-filter:blur(10px);
+}
+.brand { display:flex; align-items:center; gap:16px; }
+.brand img { height:54px; width:auto; display:block; }
+.brand-copy { color:white; }
+.brand-copy strong { display:block; font-size:24px; letter-spacing:.02em; }
+.brand-copy span { color:#fecaca; font-size:13px; text-transform:uppercase; letter-spacing:.18em; }
+.topnav { display:flex; gap:18px; flex-wrap:wrap; }
+.topnav a { color:#fff; text-decoration:none; font-weight:700; opacity:.95; }
+
+.hero-photo {
+  position:relative; overflow:hidden; min-height:420px; border-radius:34px;
+  background:
+   linear-gradient(180deg, rgba(127,29,29,0.08), rgba(0,0,0,0.45))
+    center/cover no-repeat;
+  box-shadow:0 22px 60px rgba(0,0,0,0.22);
+  border:1px solid rgba(255,255,255,0.18);
+}
+.hero-photo::after {
+  content:"";
+  position:absolute; inset:auto 0 0 0; height:40%;
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.58));
+}
+.hero-photo-badge {
+  position:absolute; left:22px; bottom:22px; z-index:2;
+  background:rgba(255,255,255,0.92); color:#7f1d1d; font-weight:800;
+  padding:12px 16px; border-radius:16px; box-shadow:0 10px 28px rgba(0,0,0,0.16);
+}
+.card-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.nomination-status {
+  margin-top:18px; padding:12px 14px; border-radius:16px;
+  background:#fff7ed; color:#9a3412; font-size:13px; font-weight:700; border:1px solid #fed7aa;
+}
+.apply-btn {
+  border:none; cursor:pointer; border-radius:16px; padding:13px 16px; font-weight:800;
+  background:linear-gradient(135deg, #b91c1c, #ef4444); color:white;
+  box-shadow:0 12px 24px rgba(185,28,28,.2);
+}
+.apply-btn:hover { transform:translateY(-1px); }
+.winners-hidden { display:none; }
+.winners-toggle-wrap { display:flex; justify-content:flex-start; margin:26px 0 10px; }
+.gallery-grid {
+  display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px;
+}
+.gallery-card {
+  position:relative; overflow:hidden; border-radius:28px; min-height:250px;
+  box-shadow:0 18px 46px rgba(0,0,0,.16); background:#111827;
+}
+.gallery-card img {
+  width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;
+}
+.gallery-card:hover img { transform:scale(1.05); }
+.gallery-card::after {
+  content:""; position:absolute; inset:auto 0 0 0; height:40%;
+  background:linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.55));
+}
+.gallery-label {
+  position:absolute; left:18px; bottom:16px; z-index:2; color:#fff; font-weight:700; font-size:14px;
+}
+.modal {
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  padding:20px; background:rgba(15,23,42,.66); z-index:1000;
+}
+.modal.open { display:flex; }
+.modal-card {
+  width:min(720px, 100%); max-height:90vh; overflow:auto; background:white; border-radius:30px;
+  padding:30px; box-shadow:0 28px 80px rgba(0,0,0,.26); position:relative;
+}
+.modal-close {
+  position:absolute; right:18px; top:18px; width:42px; height:42px; border:none; border-radius:50%;
+  background:#fee2e2; color:#991b1b; font-size:22px; cursor:pointer; font-weight:800;
+}
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.form-field { display:flex; flex-direction:column; gap:8px; margin-bottom:14px; }
+.form-field label { font-weight:700; color:#7f1d1d; font-size:14px; }
+.form-field input, .form-field textarea, .form-field select {
+  width:100%; border:1px solid #fecaca; border-radius:16px; padding:14px 15px;
+  font:inherit; background:#fff; resize:vertical;
+}
+.form-note {
+  margin:14px 0 0; padding:14px 16px; border-radius:16px;
+  background:#fef2f2; color:#7f1d1d; border:1px solid #fecaca; font-size:14px;
+}
+.submit-row { display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; margin-top:8px; }
+.success-msg { display:none; margin-top:16px; padding:14px 16px; border-radius:16px; background:#ecfdf5; color:#166534; border:1px solid #86efac; font-weight:700; }
+footer .wrapper { color:#fee2e2; }
+@media (max-width: 980px) {
+  .brand img { height:44px; }
+  .site-topbar { flex-direction:column; align-items:flex-start; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 720px) {
+  h1 { font-size:42px; }
+  .form-grid, .gallery-grid { grid-template-columns:1fr; }
+  .hero-photo { min-height:320px; }
+}
+
+
+.hero-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-slider img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.hero-slider img.active {
+  opacity: 1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hero-slider">
+  <img src="image1.jpg" class="active">
+  <img src="image2.jpg">
+  <img src="image3.jpg">
+</div>
+
+  <header class="hero">
+    <div class="wrapper">
+      <div class="site-topbar">
+        <div class="brand">
+          <img src="/images/image_1.png" alt="Логотип Фаровон" />
+          <div class="brand-copy">
+            <span>Корпоративная премия</span>
+            <strong>Farovon Awards</strong>
+          </div>
+        </div>
+        <nav class="topnav">
+          <a href="#nominations">Номинации</a>
+          <a href="#gallery">Галерея</a>
+          <a href="#winners" onclick="toggleWinners(event)">Победители</a>
+          <a href="#process">Процесс</a>
+        </nav>
+      </div>
+      <div class="hero-grid">
+        <div>
+          <div class="badge">Годовые номинации и признание лучших сотрудников</div>
+          <h1>Farovon Awards</h1>
+          <p>Премиальный корпоративный сайт награждения с номинациями, архивом победителей, галереей прошлых мероприятий и возможностью подать заявку на самовыдвижение в ключевые категории.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#nominations">Смотреть номинации</a>
+            <a class="btn btn-secondary" href="#gallery">Открыть галерею</a>
+            <a class="btn btn-secondary" href="#winners" onclick="toggleWinners(event)">Победители прошлых лет</a>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <div class="hero-photo-badge">Итоги года • церемония признания</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrapper">
+      <div class="white-panel">
+        <div class="info-grid">
+          <div class="info-box">
+            <h2>Кто участвует</h2>
+            <p>В программе участвуют сотрудники компании, которые работают не менее 6 месяцев. Для части номинаций предусмотрена подача формы, для части — автоматический анализ данных.</p>
+          </div>
+          <div class="info-box">
+            <h2>Кто определяет победителей</h2>
+            <p>Для определения победителей формируется специальная конкурсная комиссия из представителей компании. В отдельных номинациях финальное утверждение проходит на уровне Правления.</p>
+          </div>
+          <div class="info-box">
+            <h2>Главный принцип</h2>
+            <p>Все номинации, критерии, этапы и причины выбора победителей объявляются заранее, чтобы обеспечить прозрачность, справедливость и признание заслуг каждого участника.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nominations" class="wrapper">
+      <div class="section-title">
+        <div class="kicker">Номинации</div>
+        <h2>Основные категории премии</h2>
+      </div>
+      <div class="cards">
+        
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">💡</div>
+        <h3>Новатор года</h3>
+      </div>
+      <p class="desc">Выявление и поощрение сотрудников, внёсших значительный вклад в развитие компании через внедрение новых идей, проектов и улучшений.</p>
+    <div class='block'><h4>Кто может участвовать</h4><ul><li><span class='dot'></span><span>Любой сотрудник группы компаний вне зависимости от должности и подразделения</span></li><li><span class='dot'></span><span>Самовыдвижение с обоснованием и подтверждающими материалами</span></li><li><span class='dot'></span><span>Руководитель также может выдвигать кандидатов</span></li><li><span class='dot'></span><span>Проекты делятся на 3 категории по экономической эффективности</span></li></ul></div><div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Улучшенный процесс</span></li><li><span class='dot'></span><span>Экономическая эффективность</span></li><li><span class='dot'></span><span>Практическая польза</span></li><li><span class='dot'></span><span>Креативность и новизна подхода</span></li></ul></div><div class='block'><h4>Этапы участия</h4><ol><li><span class='num'>1</span><span>Объявление конкурса</span></li><li><span class='num'>2</span><span>Сбор специальных форм от номинантов</span></li><li><span class='num'>3</span><span>Отбор участников со стороны комиссии</span></li><li><span class='num'>4</span><span>Посещение рабочего места номинанта при необходимости</span></li><li><span class='num'>5</span><span>Определение победителей</span></li></ol></div><div class='card-actions'><a class='apply-btn' href='https://docs.google.com/forms/d/e/1FAIpQLSdRR0TW_FzuE088ne5wEN58mRKTmrIBU-RpYxoplwM8hjAghQ/viewform?usp=dialog' target='_blank' rel='noopener noreferrer'>Подать заявку</a></div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">📈</div>
+        <h3>Лучшие по продажам</h3>
+      </div>
+      <p class="desc">Номинации для сотрудников направлений продаж за стабильное и превосходящее выполнение ключевых показателей.</p>
+    <div class='block'><h4>Кто может участвовать</h4><ul><li><span class='dot'></span><span>Все сотрудники направлений продаж</span></li><li><span class='dot'></span><span>Участие без подачи заявки — по внутреннему анализу KPI</span></li><li><span class='dot'></span><span>Дополнительно выбирается победитель среди победителей</span></li></ul></div><div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Стабильное выполнение / перевыполнение KPI</span></li><li><span class='dot'></span><span>Оценка руководителя</span></li><li><span class='dot'></span><span>Вклад в развитие команды и культуры</span></li><li><span class='dot'></span><span>Отсутствие дисциплинарных нарушений</span></li></ul></div><div class='block'><h4>Этапы участия</h4><ol><li><span class='num'>1</span><span>Анализ стабильного выполнения KPI</span></li><li><span class='num'>2</span><span>Дополнительная экспертиза: мнение прямого руководителя</span></li><li><span class='num'>3</span><span>Работа комиссии</span></li><li><span class='num'>4</span><span>Определение победителей по подноминациям</span></li></ol></div><div class='block'><h4>Подноминации</h4><div class='tags'><span class='tag'>Лучший супервайзер по KPI</span><span class='tag'>Лучший водитель-экспедитор по KPI</span><span class='tag'>Лучший торговый представитель по KPI</span><span class='tag'>Лучший менеджер по продажам муки / комбикорма / стройнаправления</span><span class='tag'>Лучший завсклад-продавец по KPI</span><span class='tag'>Лучший руководитель региона по KPI и управленческим показателям</span><span class='tag'>Лучший менеджер по продажам масла налив</span></div></div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">👔</div>
+        <h3>Лучший руководитель</h3>
+      </div>
+      <p class="desc">Награда за вдохновляющее лидерство и результативное управление командой.</p>
+    <div class='block'><h4>Кто может участвовать</h4><ul><li><span class='dot'></span><span>Руководители подразделений, отделов, команд и участков</span></li><li><span class='dot'></span><span>Обязательное заполнение формы</span></li><li><span class='dot'></span><span>Также допускается предложение со стороны Правления</span></li></ul></div><div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Стабильное выполнение / перевыполнение KPI</span></li><li><span class='dot'></span><span>Оценка взаимодействия с другими подразделениями</span></li><li><span class='dot'></span><span>Текучесть персонала</span></li><li><span class='dot'></span><span>Количество подчинённых сотрудников</span></li><li><span class='dot'></span><span>Лояльность и вовлечённость подчинённых сотрудников</span></li></ul></div><div class='block'><h4>Этапы участия</h4><ol><li><span class='num'>1</span><span>Заполнение формы руководителем</span></li><li><span class='num'>2</span><span>Анализ и выбор номинантов со стороны комиссии</span></li><li><span class='num'>3</span><span>Финальный этап — утверждение Правлением</span></li></ol></div><div class='card-actions'><a class='apply-btn' href='https://docs.google.com/forms/d/e/1FAIpQLSdY-Q1dgD4_crTtjWQbyMV_EkcAId2H6HL-q_dHFuGZAb0gJg/viewform?usp=dialog' target='_blank' rel='noopener noreferrer'>Подать заявку</a></div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">🎓</div>
+        <h3>Наставник года</h3>
+      </div>
+      <p class="desc">Награда сотрудникам, которые в течение года официально помогали в обучении и развитии других сотрудников.</p>
+    <div class='block'><h4>Кто может участвовать</h4><ul><li><span class='dot'></span><span>Все сотрудники компании, которые официально выступали в роли наставника</span></li></ul></div><div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Количество сотрудников, прошедших наставничество</span></li><li><span class='dot'></span><span>Функционирующие ученики в компании</span></li><li><span class='dot'></span><span>Сложность обучения сотрудников, прошедших наставничество</span></li></ul></div><div class='block'><h4>Этапы участия</h4><ol><li><span class='num'>1</span><span>Сбор данных</span></li><li><span class='num'>2</span><span>Формирование списка номинантов (30 лучших)</span></li><li><span class='num'>3</span><span>Оценка комиссией</span></li><li><span class='num'>4</span><span>Определение победителей (15 сотрудников)</span></li></ol></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">🏅</div>
+        <h3>Ветераны труда</h3>
+      </div>
+      <p class="desc">Признание сотрудников за многолетнюю стабильную и качественную работу в компании.</p>
+    <div class='block'><h4>Кто может участвовать</h4><ul><li><span class='dot'></span><span>Сотрудники со стажем 10 лет</span></li><li><span class='dot'></span><span>Сотрудники со стажем 15 лет</span></li><li><span class='dot'></span><span>Сотрудники со стажем 20 лет</span></li></ul></div><div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Стаж работы в компании 10, 15 или 20 лет</span></li><li><span class='dot'></span><span>Отсутствие дисциплинарных нарушений</span></li><li><span class='dot'></span><span>Рекомендации от руководителей</span></li><li><span class='dot'></span><span>Участие в развитии компании</span></li></ul></div><div class='block'><h4>Этапы участия</h4><ol><li><span class='num'>1</span><span>Формирование списка сотрудников по выслуге лет</span></li><li><span class='num'>2</span><span>Качественная оценка личных и профессиональных характеристик</span></li><li><span class='num'>3</span><span>Комиссия определяет лучших сотрудников</span></li><li><span class='num'>4</span><span>Награждение</span></li></ol></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">⭐</div>
+        <h3>Лучший сотрудник года</h3>
+      </div>
+      <p class="desc">За выдающиеся результаты, инициативность, вклад в общее дело и соответствие ценностям компании.</p>
+    <div class='block'><h4>Метод определения победителя</h4><ul><li><span class='dot'></span><span>Оценка руководителей и коллег через опрос 360</span></li><li><span class='dot'></span><span>Индивидуальные ID для каждого сотрудника</span></li><li><span class='dot'></span><span>SMS-рассылка на номер телефона для прохождения опроса</span></li></ul></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">🤝</div>
+        <h3>Команда года</h3>
+      </div>
+      <p class="desc">За выдающиеся коллективные результаты, эффективное взаимодействие и вклад в достижение бизнес-целей компании.</p>
+    <div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Выполнение / перевыполнение командных KPI</span></li><li><span class='dot'></span><span>Вклад в бизнес-результат</span></li><li><span class='dot'></span><span>Эффективное взаимодействие внутри команды</span></li><li><span class='dot'></span><span>Кросс-функциональное сотрудничество</span></li><li><span class='dot'></span><span>Участие в проектах и улучшениях</span></li><li><span class='dot'></span><span>Отсутствие критических ошибок и дисциплинарных нарушений</span></li></ul></div><div class='block'><h4>Метод определения победителя</h4><ul><li><span class='dot'></span><span>Формирование списка команд</span></li><li><span class='dot'></span><span>Аналитическая оценка</span></li><li><span class='dot'></span><span>Комиссионная оценка</span></li><li><span class='dot'></span><span>Определение победителя</span></li></ul></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">❤️</div>
+        <h3>Амбассадор ценностей компании</h3>
+      </div>
+      <p class="desc">Награда сотруднику, который в ежедневной работе и взаимодействии с коллегами последовательно демонстрирует и продвигает корпоративные ценности компании.</p>
+    <div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Соответствие корпоративным ценностям в работе</span></li><li><span class='dot'></span><span>Поведение по отношению к коллегам</span></li><li><span class='dot'></span><span>Влияние на командную атмосферу</span></li><li><span class='dot'></span><span>Пример для других сотрудников</span></li><li><span class='dot'></span><span>Участие в развитии корпоративной культуры</span></li><li><span class='dot'></span><span>Отсутствие дисциплинарных нарушений</span></li></ul></div><div class='block'><h4>Метод определения победителя</h4><ul><li><span class='dot'></span><span>Оценка руководителей и коллег через опрос 360, раздел «Ценности»</span></li><li><span class='dot'></span><span>Индивидуальные ID сотрудников</span></li><li><span class='dot'></span><span>SMS-рассылка для прохождения опроса</span></li></ul></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+    <article class="card">
+      <div class="card-head">
+        <div class="icon">📚</div>
+        <h3>Лучший тренер года</h3>
+      </div>
+      <p class="desc">Награда сотруднику, внёсшему значительный вклад в развитие персонала через обучение, передачу знаний и формирование навыков.</p>
+    <div class='block'><h4>Критерии оценки</h4><ul><li><span class='dot'></span><span>Количество проведённых обучений и тренингов</span></li><li><span class='dot'></span><span>Охват сотрудников</span></li><li><span class='dot'></span><span>Качество обучения по оценке участников</span></li></ul></div><div class='block'><h4>Метод определения победителя</h4><ul><li><span class='dot'></span><span>Формирование списка кандидатов</span></li><li><span class='dot'></span><span>Оценка эффективности обучения</span></li><li><span class='dot'></span><span>Оценка участников</span></li><li><span class='dot'></span><span>Комиссионная оценка</span></li><li><span class='dot'></span><span>Определение победителя</span></li></ul></div><div class='nomination-status'>Победитель определяется по итогам внутреннего анализа данных</div></article>
+      </div>
+    </section>
+
+    <section id="gallery" class="wrapper">
+      <div class="section-title">
+        <div class="kicker">Галерея</div>
+        <h2>Фото с прошлых мероприятий «Итоги года»</h2>
+      </div>
+      <div class="gallery-grid">
+
+        <div class="gallery-card">
+          <img src="/images/image_2.jpeg" alt="Фото церемонии Farovon Awards 1" />
+          <div class="gallery-label">Farovon Awards • кадр 1</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_3.jpeg" alt="Фото церемонии Farovon Awards 2" />
+          <div class="gallery-label">Farovon Awards • кадр 2</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_4.jpeg" alt="Фото церемонии Farovon Awards 3" />
+          <div class="gallery-label">Farovon Awards • кадр 3</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_5.jpeg" alt="Фото церемонии Farovon Awards 4" />
+          <div class="gallery-label">Farovon Awards • кадр 4</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_6.jpeg" alt="Фото церемонии Farovon Awards 5" />
+          <div class="gallery-label">Farovon Awards • кадр 5</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_7.jpeg" alt="Фото церемонии Farovon Awards 6" />
+          <div class="gallery-label">Farovon Awards • кадр 6</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_8.jpeg" alt="Фото церемонии Farovon Awards 7" />
+          <div class="gallery-label">Farovon Awards • кадр 7</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_9.jpeg" alt="Фото церемонии Farovon Awards 8" />
+          <div class="gallery-label">Farovon Awards • кадр 8</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_10.jpeg" alt="Фото церемонии Farovon Awards 9" />
+          <div class="gallery-label">Farovon Awards • кадр 9</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_11.jpeg" alt="Фото церемонии Farovon Awards 10" />
+          <div class="gallery-label">Farovon Awards • кадр 10</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_12.jpeg" alt="Фото церемонии Farovon Awards 11" />
+          <div class="gallery-label">Farovon Awards • кадр 11</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_13.jpeg" alt="Фото церемонии Farovon Awards 12" />
+          <div class="gallery-label">Farovon Awards • кадр 12</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_14.jpeg" alt="Фото церемонии Farovon Awards 13" />
+          <div class="gallery-label">Farovon Awards • кадр 13</div>
+        </div>
+        <div class="gallery-card">
+          <img src="/images/image_15.jpeg" alt="Фото церемонии Farovon Awards 14" />
+          <div class="gallery-label">Farovon Awards • кадр 14</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrapper winners-toggle-wrap">
+      <button class="apply-btn" type="button" onclick="toggleWinners()">
+        Показать / скрыть победителей прошлых лет
+      </button>
+    </section>
+
+    <section id="winners" class="wrapper winners-hidden">
+      <div class="section-title">
+        <div class="kicker">Архив победителей</div>
+        <h2>Победители и рекомендованные сотрудники по итогам 2025 года</h2>
+      </div>
+
+      <div class="archive-panel">
+        <div class="archive-inner">
+          <div class="archive-stats">
+            <div class="archive-stat"><div class="value">2025</div><div class="label">год награждения</div></div>
+            <div class="archive-stat"><div class="value">9</div><div class="label">разделов / приложений</div></div>
+            <div class="archive-stat"><div class="value">464</div><div class="label">сотрудников в списке</div></div>
+            <div class="archive-stat"><div class="value">100%</div><div class="label">полный список из протокола</div></div>
+          </div>
+
+          <div class="archive-tools">
+            <input id="winnerSearch" type="text" placeholder="Поиск по ФИО или должности..." />
+            <select id="winnerCategory">
+              <option value="">Все номинации</option><option value="Новатор года">Новатор года</option><option value="Лучший руководитель">Лучший руководитель</option><option value="Наставник года">Наставник года</option><option value="Ветераны труда">Ветераны труда</option><option value="Лучший по продажам">Лучший по продажам</option><option value="Лучший сотрудник года">Лучший сотрудник года</option><option value="Приверженец корпоративных ценностей компании">Приверженец корпоративных ценностей компании</option><option value="Тренер года">Тренер года</option><option value="Список сотрудников, рекомендованных комиссией к поощрению в форме благодарности">Список сотрудников, рекомендованных комиссией к поощрению в форме благодарности</option>
+            </select>
+          </div>
+
+          
+    <details class="winner-group" open data-group="новатор года">
+      <summary>
+        <div>
+          <h3>Новатор года</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">18 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="юсупов мухаммадаъзам шарифчонович" data-position="координатор" data-nomination="новатор года"><td>1</td><td>Юсупов Мухаммадаъзам Шарифчонович</td><td>Координатор</td></tr><tr data-name="мирзобобоев мирзобарот муродчонович" data-position="начальник производства" data-nomination="новатор года"><td>2</td><td>Мирзобобоев Мирзобарот Муродчонович</td><td>Начальник производства</td></tr><tr data-name="собиров далерчон абдусамадович" data-position="заведующий лабораторией" data-nomination="новатор года"><td>3</td><td>Собиров Далерчон Абдусамадович</td><td>Заведующий лабораторией</td></tr><tr data-name="кучкоров икром ильхомжонович" data-position="специалист" data-nomination="новатор года"><td>4</td><td>Кучкоров Икром Ильхомжонович</td><td>Специалист</td></tr><tr data-name="рачабова сталина рахимовна" data-position="оператор" data-nomination="новатор года"><td>5</td><td>Рачабова Сталина Рахимовна</td><td>Оператор</td></tr><tr data-name="абдурахимова нодира умарчоновна" data-position="оператор" data-nomination="новатор года"><td>6</td><td>Абдурахимова Нодира Умарчоновна</td><td>Оператор</td></tr><tr data-name="махмудова бахрихон нарзуллоевна" data-position="старший оператор" data-nomination="новатор года"><td>7</td><td>Махмудова Бахрихон Нарзуллоевна</td><td>Старший оператор</td></tr><tr data-name="файзуллоев сипаргис хусейнчонович" data-position="специалист" data-nomination="новатор года"><td>8</td><td>Файзуллоев Сипаргис Хусейнчонович</td><td>Специалист</td></tr><tr data-name="азимӣ хусрав аъзам" data-position="менеджер" data-nomination="новатор года"><td>9</td><td>Азимӣ Хусрав Аъзам</td><td>Менеджер</td></tr><tr data-name="урунова фарангис рафиевна" data-position="hr bp" data-nomination="новатор года"><td>10</td><td>Урунова Фарангис Рафиевна</td><td>HR BP</td></tr><tr data-name="хомидов муродчон рафикчонович" data-position="инженер" data-nomination="новатор года"><td>11</td><td>Хомидов Муродчон Рафикчонович</td><td>Инженер</td></tr><tr data-name="расулов комилчон мамадалиевич" data-position="главный механик" data-nomination="новатор года"><td>12</td><td>Расулов Комилчон Мамадалиевич</td><td>Главный механик</td></tr><tr data-name="саидчонов иномчон аличонович" data-position="слесарь-ремонтник" data-nomination="новатор года"><td>13</td><td>Саидчонов Иномчон Аличонович</td><td>Слесарь-ремонтник</td></tr><tr data-name="вахобов абдучамил абдучаборович" data-position="слесарь-ремонтник" data-nomination="новатор года"><td>14</td><td>Вахобов Абдучамил Абдучаборович</td><td>Слесарь-ремонтник</td></tr><tr data-name="турсунов курбончон алиевич" data-position="токарь-фрезеровщик" data-nomination="новатор года"><td>15</td><td>Турсунов Курбончон Алиевич</td><td>Токарь-фрезеровщик</td></tr><tr data-name="манонов абдуахад абдулахайевич" data-position="инженер-проектировщик" data-nomination="новатор года"><td>16</td><td>Манонов Абдуахад Абдулахайевич</td><td>Инженер-проектировщик</td></tr><tr data-name="низомиддинов манучехр чамшедчонович" data-position="бухгалтер-реализатор" data-nomination="новатор года"><td>17</td><td>Низомиддинов Манучехр Чамшедчонович</td><td>Бухгалтер-реализатор</td></tr><tr data-name="разокзода фуркат восити" data-position="бухгалтер" data-nomination="новатор года"><td>18</td><td>Разокзода Фуркат Восити</td><td>Бухгалтер</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="лучший руководитель">
+      <summary>
+        <div>
+          <h3>Лучший руководитель</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">10 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="мирзобобоев мирзохалим" data-position="директор" data-nomination="лучший руководитель"><td>1</td><td>Мирзобобоев Мирзохалим</td><td>Директор</td></tr><tr data-name="шарифзода шарафчон шариф" data-position="начальник" data-nomination="лучший руководитель"><td>2</td><td>Шарифзода Шарафчон Шариф</td><td>Начальник</td></tr><tr data-name="абдувахобов абдували абдуазизович" data-position="координатор" data-nomination="лучший руководитель"><td>3</td><td>Абдувахобов Абдували Абдуазизович</td><td>Координатор</td></tr><tr data-name="собиров рустам эркинчонович" data-position="главный технолог" data-nomination="лучший руководитель"><td>4</td><td>Собиров Рустам Эркинчонович</td><td>Главный технолог</td></tr><tr data-name="нуров баходур чамшедович" data-position="начальник" data-nomination="лучший руководитель"><td>5</td><td>Нуров Баходур Чамшедович</td><td>Начальник</td></tr><tr data-name="обидов фарход муминчонович" data-position="начальник" data-nomination="лучший руководитель"><td>6</td><td>Обидов Фарход Муминчонович</td><td>Начальник</td></tr><tr data-name="абдувохидов чамшед шарифчонович" data-position="руководитель" data-nomination="лучший руководитель"><td>7</td><td>Абдувохидов Чамшед Шарифчонович</td><td>Руководитель</td></tr><tr data-name="валиев максудчон абдуганиевич" data-position="начальник производства" data-nomination="лучший руководитель"><td>8</td><td>Валиев Максудчон Абдуганиевич</td><td>Начальник производства</td></tr><tr data-name="махмудов ислом усмонович" data-position="главный энергетик" data-nomination="лучший руководитель"><td>9</td><td>Махмудов Ислом Усмонович</td><td>Главный энергетик</td></tr><tr data-name="наимов нурулло насимович" data-position="начальник отдела" data-nomination="лучший руководитель"><td>10</td><td>Наимов Нурулло Насимович</td><td>Начальник отдела</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="наставник года">
+      <summary>
+        <div>
+          <h3>Наставник года</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">15 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="абдалиева дилрабо уктамбоевна" data-position="шеф повар" data-nomination="наставник года"><td>1</td><td>Абдалиева Дилрабо Уктамбоевна</td><td>Шеф повар</td></tr><tr data-name="афсахзод хаттоби" data-position="начальник смены" data-nomination="наставник года"><td>2</td><td>Афсахзод Хаттоби</td><td>Начальник смены</td></tr><tr data-name="турсунбоев зафаржон султанович" data-position="главный механик" data-nomination="наставник года"><td>3</td><td>Турсунбоев Зафаржон Султанович</td><td>Главный механик</td></tr><tr data-name="тусматов акмалчон рахматчонович" data-position="начальник смены" data-nomination="наставник года"><td>4</td><td>Тусматов Акмалчон Рахматчонович</td><td>Начальник смены</td></tr><tr data-name="хочаев баховаддин хошимович" data-position="начальник производства" data-nomination="наставник года"><td>5</td><td>Хочаев Баховаддин Хошимович</td><td>Начальник производства</td></tr><tr data-name="мавлонов шавкат абдумаликович" data-position="начальник отдела" data-nomination="наставник года"><td>6</td><td>Мавлонов Шавкат Абдумаликович</td><td>Начальник отдела</td></tr><tr data-name="курбонов субхончон юсупович" data-position="главный технолог" data-nomination="наставник года"><td>7</td><td>Курбонов Субхончон Юсупович</td><td>Главный технолог</td></tr><tr data-name="юнусов баходур абдурауфович" data-position="заведующий складом" data-nomination="наставник года"><td>8</td><td>Юнусов Баходур Абдурауфович</td><td>Заведующий складом</td></tr><tr data-name="ашуров мухсинчон олимчонович" data-position="начальник" data-nomination="наставник года"><td>9</td><td>Ашуров Мухсинчон Олимчонович</td><td>Начальник</td></tr><tr data-name="эргашев равшан махмудчонович" data-position="старший оператор" data-nomination="наставник года"><td>10</td><td>Эргашев Равшан Махмудчонович</td><td>Старший оператор</td></tr><tr data-name="рахматов музаффар пулотович" data-position="мастер" data-nomination="наставник года"><td>11</td><td>Рахматов Музаффар Пулотович</td><td>Мастер</td></tr><tr data-name="усмонов азим хасанович" data-position="вспомогательный работник" data-nomination="наставник года"><td>12</td><td>Усмонов Азим Хасанович</td><td>Вспомогательный работник</td></tr><tr data-name="ахмедов сайфулло курбанович" data-position="заведующий складом" data-nomination="наставник года"><td>13</td><td>Ахмедов Сайфулло Курбанович</td><td>Заведующий складом</td></tr><tr data-name="мавлонов шахзод абдумаликович" data-position="начальник отдела" data-nomination="наставник года"><td>14</td><td>Мавлонов Шахзод Абдумаликович</td><td>Начальник отдела</td></tr><tr data-name="чумаев аминчон азимчонович" data-position="координатор" data-nomination="наставник года"><td>15</td><td>Чумаев Аминчон Азимчонович</td><td>Координатор</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="ветераны труда">
+      <summary>
+        <div>
+          <h3>Ветераны труда</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">136 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="рабиев илхомджон бобочонович" data-position="главный аудитор" data-nomination="ветераны труда"><td>1</td><td>Рабиев Илхомджон Бобочонович</td><td>Главный аудитор</td></tr><tr data-name="юсупов насимджон ибрагимджонович" data-position="снабженец" data-nomination="ветераны труда"><td>2</td><td>Юсупов Насимджон Ибрагимджонович</td><td>Снабженец</td></tr><tr data-name="бобочонов орифчон рахматчонович" data-position="снабженец" data-nomination="ветераны труда"><td>3</td><td>Бобочонов Орифчон Рахматчонович</td><td>Снабженец</td></tr><tr data-name="одинаев шухрат мирзочонович" data-position="снабженец" data-nomination="ветераны труда"><td>4</td><td>Одинаев Шухрат Мирзочонович</td><td>Снабженец</td></tr><tr data-name="мирзомансуров мирзоахмад" data-position="снабженец" data-nomination="ветераны труда"><td>5</td><td>Мирзомансуров Мирзоахмад</td><td>Снабженец</td></tr><tr data-name="сулаймонов илхом ибрагимджанович" data-position="снабженец" data-nomination="ветераны труда"><td>6</td><td>Сулаймонов Илхом Ибрагимджанович</td><td>Снабженец</td></tr><tr data-name="иномов абдуахад рустамович" data-position="заправщик" data-nomination="ветераны труда"><td>7</td><td>Иномов Абдуахад Рустамович</td><td>Заправщик</td></tr><tr data-name="ашматов абдумалик" data-position="водитель грузового автомобиля" data-nomination="ветераны труда"><td>8</td><td>Ашматов Абдумалик</td><td>Водитель грузового автомобиля</td></tr><tr data-name="чалилова комила турдибоевна" data-position="помощник повара" data-nomination="ветераны труда"><td>9</td><td>Чалилова Комила Турдибоевна</td><td>Помощник повара</td></tr><tr data-name="файзиев нурулло пулотович" data-position="повар" data-nomination="ветераны труда"><td>10</td><td>Файзиев Нурулло Пулотович</td><td>Повар</td></tr><tr data-name="каримова шохиста ахмадовна" data-position="техничка" data-nomination="ветераны труда"><td>11</td><td>Каримова Шохиста Ахмадовна</td><td>Техничка</td></tr><tr data-name="собирова муътабар ибрагимовна" data-position="техничка" data-nomination="ветераны труда"><td>12</td><td>Собирова Муътабар Ибрагимовна</td><td>Техничка</td></tr><tr data-name="ашрапова кумри урунбоевна" data-position="техничка" data-nomination="ветераны труда"><td>13</td><td>Ашрапова Кумри Урунбоевна</td><td>Техничка</td></tr><tr data-name="курбонова насиба тошпулотовна" data-position="техничка" data-nomination="ветераны труда"><td>14</td><td>Курбонова Насиба Тошпулотовна</td><td>Техничка</td></tr><tr data-name="шамсиддинов абдумалик абдурахмонович" data-position="заведующий лабораторией" data-nomination="ветераны труда"><td>15</td><td>Шамсиддинов Абдумалик Абдурахмонович</td><td>Заведующий лабораторией</td></tr><tr data-name="рашидов абдушариф абдуллоджонович" data-position="старший системный администратор" data-nomination="ветераны труда"><td>16</td><td>Рашидов Абдушариф Абдуллоджонович</td><td>Старший системный администратор</td></tr><tr data-name="ибрагимов чаффар иркинович" data-position="технолог" data-nomination="ветераны труда"><td>17</td><td>Ибрагимов Чаффар Иркинович</td><td>Технолог</td></tr><tr data-name="шарипов одилходжа исмонович" data-position="супервайзер" data-nomination="ветераны труда"><td>18</td><td>Шарипов Одилходжа Исмонович</td><td>Супервайзер</td></tr><tr data-name="рустамов рахимджон мухамадович" data-position="руководитель" data-nomination="ветераны труда"><td>19</td><td>Рустамов Рахимджон Мухамадович</td><td>Руководитель</td></tr><tr data-name="гаффоров шухратчон самиевич" data-position="инженер пто" data-nomination="ветераны труда"><td>20</td><td>Гаффоров Шухратчон Самиевич</td><td>Инженер ПТО</td></tr><tr data-name="кодиров музаффар абдусамиевич" data-position="мастер" data-nomination="ветераны труда"><td>21</td><td>Кодиров Музаффар Абдусамиевич</td><td>Мастер</td></tr><tr data-name="эргашев хуршедчон махмудчонович" data-position="бригадир" data-nomination="ветераны труда"><td>22</td><td>Эргашев Хуршедчон Махмудчонович</td><td>Бригадир</td></tr><tr data-name="отачонов чамшед олимович" data-position="бригадир" data-nomination="ветераны труда"><td>23</td><td>Отачонов Чамшед Олимович</td><td>Бригадир</td></tr><tr data-name="абдуллоев гуломчон иномчонович" data-position="логист" data-nomination="ветераны труда"><td>24</td><td>Абдуллоев Гуломчон Иномчонович</td><td>Логист</td></tr><tr data-name="маматов гуломчон негматчонович" data-position="грузчик" data-nomination="ветераны труда"><td>25</td><td>Маматов Гуломчон Негматчонович</td><td>Грузчик</td></tr><tr data-name="мамадкулов зикрулло хабибуллоевич" data-position="грузчик" data-nomination="ветераны труда"><td>26</td><td>Мамадкулов Зикрулло Хабибуллоевич</td><td>Грузчик</td></tr><tr data-name="хайдарзода мамадали" data-position="грузчик" data-nomination="ветераны труда"><td>27</td><td>Хайдарзода Мамадали</td><td>Грузчик</td></tr><tr data-name="хусенходжаев нозимхоча абдуллоевич" data-position="заведующий складом" data-nomination="ветераны труда"><td>28</td><td>Хусенходжаев Нозимхоча Абдуллоевич</td><td>Заведующий складом</td></tr><tr data-name="маматов чурабой махмудчонович" data-position="грузчик" data-nomination="ветераны труда"><td>29</td><td>Маматов Чурабой Махмудчонович</td><td>Грузчик</td></tr><tr data-name="шарипов алишер исмонович" data-position="заведующий складом" data-nomination="ветераны труда"><td>30</td><td>Шарипов Алишер Исмонович</td><td>Заведующий складом</td></tr><tr data-name="чабборов гулмурод абдугафорич" data-position="грузчик" data-nomination="ветераны труда"><td>31</td><td>Чабборов Гулмурод Абдугафорич</td><td>Грузчик</td></tr><tr data-name="набиев гуломчон абдусаломович" data-position="грузчик" data-nomination="ветераны труда"><td>32</td><td>Набиев Гуломчон Абдусаломович</td><td>Грузчик</td></tr><tr data-name="вохидов ахмадчон рузибобоевич" data-position="грузчик" data-nomination="ветераны труда"><td>33</td><td>Вохидов Ахмадчон Рузибобоевич</td><td>Грузчик</td></tr><tr data-name="рахимов бахтиёр махмадмуродович" data-position="грузчик" data-nomination="ветераны труда"><td>34</td><td>Рахимов Бахтиёр Махмадмуродович</td><td>Грузчик</td></tr><tr data-name="назаров хусейн шарифчонович" data-position="грузчик" data-nomination="ветераны труда"><td>35</td><td>Назаров Хусейн Шарифчонович</td><td>Грузчик</td></tr><tr data-name="джалилов рашид рахимчонович" data-position="грузчик" data-nomination="ветераны труда"><td>36</td><td>Джалилов Рашид Рахимчонович</td><td>Грузчик</td></tr><tr data-name="махбубов аловаддин гаффорович" data-position="старший специалист" data-nomination="ветераны труда"><td>37</td><td>Махбубов Аловаддин Гаффорович</td><td>Старший специалист</td></tr><tr data-name="миркамолова шафоат усмановна" data-position="оформитель" data-nomination="ветераны труда"><td>38</td><td>Миркамолова Шафоат Усмановна</td><td>Оформитель</td></tr><tr data-name="усмонов соли заирбаевич" data-position="охранник" data-nomination="ветераны труда"><td>39</td><td>Усмонов Соли Заирбаевич</td><td>Охранник</td></tr><tr data-name="усмонов умедджон солиевич" data-position="охранник" data-nomination="ветераны труда"><td>40</td><td>Усмонов Умедджон Солиевич</td><td>Охранник</td></tr><tr data-name="мамадчонова гулнора абдувалиевна" data-position="диспетчер" data-nomination="ветераны труда"><td>41</td><td>Мамадчонова Гулнора Абдувалиевна</td><td>Диспетчер</td></tr><tr data-name="абдусатторова махсуда абдурауфовна" data-position="диспетчер" data-nomination="ветераны труда"><td>42</td><td>Абдусатторова Махсуда Абдурауфовна</td><td>Диспетчер</td></tr><tr data-name="ибодуллоев фаридун умарович" data-position="руководитель" data-nomination="ветераны труда"><td>43</td><td>Ибодуллоев Фаридун Умарович</td><td>Руководитель</td></tr><tr data-name="сангинзода хайдарчон одили" data-position="руководитель" data-nomination="ветераны труда"><td>44</td><td>Сангинзода Хайдарчон Одили</td><td>Руководитель</td></tr><tr data-name="косимов парвизхон орифхонович" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>45</td><td>Косимов Парвизхон Орифхонович</td><td>Менеджер по продажам</td></tr><tr data-name="очилов анварчон ахроркулович" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>46</td><td>Очилов Анварчон Ахроркулович</td><td>Менеджер по продажам</td></tr><tr data-name="хочибоев набичон умарович" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>47</td><td>Хочибоев Набичон Умарович</td><td>Менеджер по продажам</td></tr><tr data-name="курбонов ислом сабурович" data-position="складчик-продавец" data-nomination="ветераны труда"><td>48</td><td>Курбонов Ислом Сабурович</td><td>Складчик-продавец</td></tr><tr data-name="юсупов умарчон сиддикбоевич" data-position="руководитель" data-nomination="ветераны труда"><td>49</td><td>Юсупов Умарчон Сиддикбоевич</td><td>Руководитель</td></tr><tr data-name="каримов мансурчон рахимчонович" data-position="руководитель" data-nomination="ветераны труда"><td>50</td><td>Каримов Мансурчон Рахимчонович</td><td>Руководитель</td></tr><tr data-name="хафизов искандар ибрахимович" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>51</td><td>Хафизов Искандар Ибрахимович</td><td>Менеджер по продажам</td></tr><tr data-name="урунов акмалхуча абдуллоевич" data-position="руководитель" data-nomination="ветераны труда"><td>52</td><td>Урунов Акмалхуча Абдуллоевич</td><td>Руководитель</td></tr><tr data-name="рустамов гафур гуфрончонович" data-position="инкасатор-водитель" data-nomination="ветераны труда"><td>53</td><td>Рустамов Гафур Гуфрончонович</td><td>Инкасатор-водитель</td></tr><tr data-name="абдурахимов зафарджон абдурахмонович" data-position="бухгалтер-кассир" data-nomination="ветераны труда"><td>54</td><td>Абдурахимов Зафарджон Абдурахмонович</td><td>Бухгалтер-кассир</td></tr><tr data-name="халилов абдували абдуллоевич" data-position="вспомогательный работник" data-nomination="ветераны труда"><td>55</td><td>Халилов Абдували Абдуллоевич</td><td>Вспомогательный работник</td></tr><tr data-name="хамдамова муъмина усмонбоевна" data-position="техничка" data-nomination="ветераны труда"><td>56</td><td>Хамдамова Муъмина Усмонбоевна</td><td>Техничка</td></tr><tr data-name="олимов чамшед мамурович" data-position="заведующий складом" data-nomination="ветераны труда"><td>57</td><td>Олимов Чамшед Мамурович</td><td>Заведующий складом</td></tr><tr data-name="абдуллаева ранохон чураевна" data-position="фасовщица" data-nomination="ветераны труда"><td>58</td><td>Абдуллаева Ранохон Чураевна</td><td>Фасовщица</td></tr><tr data-name="чумаева мукаддас шарифовна" data-position="фасовщица" data-nomination="ветераны труда"><td>59</td><td>Чумаева Мукаддас Шарифовна</td><td>Фасовщица</td></tr><tr data-name="чалилова матлуба уктамовна" data-position="фасовщица" data-nomination="ветераны труда"><td>60</td><td>Чалилова Матлуба Уктамовна</td><td>Фасовщица</td></tr><tr data-name="точибоева мукаддас абдурауфовна" data-position="фасовщица" data-nomination="ветераны труда"><td>61</td><td>Точибоева Мукаддас Абдурауфовна</td><td>Фасовщица</td></tr><tr data-name="исобоева малика сотиболдиевна" data-position="техничка" data-nomination="ветераны труда"><td>62</td><td>Исобоева Малика Сотиболдиевна</td><td>Техничка</td></tr><tr data-name="очилов гайбуллочон хабибуллаевич" data-position="механик" data-nomination="ветераны труда"><td>63</td><td>Очилов Гайбуллочон Хабибуллаевич</td><td>Механик</td></tr><tr data-name="узоков анварчон мухаммадович" data-position="старший оператор" data-nomination="ветераны труда"><td>64</td><td>Узоков Анварчон Мухаммадович</td><td>Старший оператор</td></tr><tr data-name="хакимова муяссар уктамовна" data-position="фасовщица" data-nomination="ветераны труда"><td>65</td><td>Хакимова Муяссар Уктамовна</td><td>Фасовщица</td></tr><tr data-name="куратова мухаббат эргашевна" data-position="лаборант" data-nomination="ветераны труда"><td>66</td><td>Куратова Мухаббат Эргашевна</td><td>Лаборант</td></tr><tr data-name="куратова шодмоной чабборовна" data-position="техничка" data-nomination="ветераны труда"><td>67</td><td>Куратова Шодмоной Чабборовна</td><td>Техничка</td></tr><tr data-name="азимов чамшед негматович" data-position="аппаратчик сушки и помола" data-nomination="ветераны труда"><td>68</td><td>Азимов Чамшед Негматович</td><td>Аппаратчик сушки и помола</td></tr><tr data-name="халилова дилором муйдинходжаевна" data-position="фасовщица" data-nomination="ветераны труда"><td>69</td><td>Халилова Дилором Муйдинходжаевна</td><td>Фасовщица</td></tr><tr data-name="собиров рустам эркинчонович" data-position="главный технолог" data-nomination="ветераны труда"><td>70</td><td>Собиров Рустам Эркинчонович</td><td>Главный технолог</td></tr><tr data-name="мирзобобоев мирзобарот муродчонович" data-position="начальник производства" data-nomination="ветераны труда"><td>71</td><td>Мирзобобоев Мирзобарот Муродчонович</td><td>Начальник производства</td></tr><tr data-name="эркабоева зиёдахон куйсунбоевна" data-position="техничка" data-nomination="ветераны труда"><td>72</td><td>Эркабоева Зиёдахон Куйсунбоевна</td><td>Техничка</td></tr><tr data-name="баротова гулнора негматовна" data-position="фасовщица" data-nomination="ветераны труда"><td>73</td><td>Баротова Гулнора Негматовна</td><td>Фасовщица</td></tr><tr data-name="искандаров хайрулло абдуллоевич" data-position="руководитель" data-nomination="ветераны труда"><td>74</td><td>Искандаров Хайрулло Абдуллоевич</td><td>Руководитель</td></tr><tr data-name="пулатова насиба чумаевна" data-position="лаборант" data-nomination="ветераны труда"><td>75</td><td>Пулатова Насиба Чумаевна</td><td>Лаборант</td></tr><tr data-name="турсунбоев зафаржон султанович" data-position="главный механик" data-nomination="ветераны труда"><td>76</td><td>Турсунбоев Зафаржон Султанович</td><td>Главный механик</td></tr><tr data-name="каримова турсуной ганиевна" data-position="техничка" data-nomination="ветераны труда"><td>77</td><td>Каримова Турсуной Ганиевна</td><td>Техничка</td></tr><tr data-name="рахмонова гулсара темуровна" data-position="техничка" data-nomination="ветераны труда"><td>78</td><td>Рахмонова Гулсара Темуровна</td><td>Техничка</td></tr><tr data-name="тусматов махмудчон рахматчонович" data-position="старший оператор" data-nomination="ветераны труда"><td>79</td><td>Тусматов Махмудчон Рахматчонович</td><td>Старший оператор</td></tr><tr data-name="норчаева бахринисо туйчиевна" data-position="техничка" data-nomination="ветераны труда"><td>80</td><td>Норчаева Бахринисо Туйчиевна</td><td>Техничка</td></tr><tr data-name="алиматова ойдиной рахматуллоевна" data-position="фасовщица" data-nomination="ветераны труда"><td>81</td><td>Алиматова Ойдиной Рахматуллоевна</td><td>Фасовщица</td></tr><tr data-name="хабибова камарнисо бахруллоевна" data-position="фасовщица" data-nomination="ветераны труда"><td>82</td><td>Хабибова Камарнисо Бахруллоевна</td><td>Фасовщица</td></tr><tr data-name="ахмедова зарифа алиджоновна" data-position="фасовщица" data-nomination="ветераны труда"><td>83</td><td>Ахмедова Зарифа Алиджоновна</td><td>Фасовщица</td></tr><tr data-name="каюмов махсудчон муминович" data-position="главный механик" data-nomination="ветераны труда"><td>84</td><td>Каюмов Махсудчон Муминович</td><td>Главный механик</td></tr><tr data-name="орипов алишер вохидович" data-position="старший оператор" data-nomination="ветераны труда"><td>85</td><td>Орипов Алишер Вохидович</td><td>Старший оператор</td></tr><tr data-name="урунбоев баходур абдурашидович" data-position="оператор" data-nomination="ветераны труда"><td>86</td><td>Урунбоев Баходур Абдурашидович</td><td>Оператор</td></tr><tr data-name="искандарова мадинахон хошимчоновна" data-position="старший специалист" data-nomination="ветераны труда"><td>87</td><td>Искандарова Мадинахон Хошимчоновна</td><td>Старший специалист</td></tr><tr data-name="абдуллоев салимчон бобочонович" data-position="снабженец" data-nomination="ветераны труда"><td>88</td><td>Абдуллоев Салимчон Бобочонович</td><td>Снабженец</td></tr><tr data-name="обидов фарход муминчонович" data-position="начальник" data-nomination="ветераны труда"><td>89</td><td>Обидов Фарход Муминчонович</td><td>Начальник</td></tr><tr data-name="каюмов ахмадчон абдуллочонович" data-position="механик" data-nomination="ветераны труда"><td>90</td><td>Каюмов Ахмадчон Абдуллочонович</td><td>Механик</td></tr><tr data-name="азимов азизчон каюмович" data-position="мастер" data-nomination="ветераны труда"><td>91</td><td>Азимов Азизчон Каюмович</td><td>Мастер</td></tr><tr data-name="косимов муродджон муминович" data-position="весовщик" data-nomination="ветераны труда"><td>92</td><td>Косимов Муродджон Муминович</td><td>Весовщик</td></tr><tr data-name="юнусов баходур абдурауфович" data-position="заведующий складом" data-nomination="ветераны труда"><td>93</td><td>Юнусов Баходур Абдурауфович</td><td>Заведующий складом</td></tr><tr data-name="ганиев нарзулло файзуллоевич" data-position="оператор" data-nomination="ветераны труда"><td>94</td><td>Ганиев Нарзулло Файзуллоевич</td><td>Оператор</td></tr><tr data-name="эргашев равшан махмудчонович" data-position="старший оператор" data-nomination="ветераны труда"><td>95</td><td>Эргашев Равшан Махмудчонович</td><td>Старший оператор</td></tr><tr data-name="ашматова хамида точиевна" data-position="фасовщица" data-nomination="ветераны труда"><td>96</td><td>Ашматова Хамида Точиевна</td><td>Фасовщица</td></tr><tr data-name="расулов комилчон мамадалиевич" data-position="главный механик" data-nomination="ветераны труда"><td>97</td><td>Расулов Комилчон Мамадалиевич</td><td>Главный механик</td></tr><tr data-name="рустамов мухаммад бобочонович" data-position="оператор кислородной установки" data-nomination="ветераны труда"><td>98</td><td>Рустамов Мухаммад Бобочонович</td><td>Оператор кислородной установки</td></tr><tr data-name="махмудов анварджон рузиевич" data-position="начальник производства" data-nomination="ветераны труда"><td>99</td><td>Махмудов Анварджон Рузиевич</td><td>Начальник производства</td></tr><tr data-name="гафуров абдурасул абдувахобович" data-position="слесарь-монтажник" data-nomination="ветераны труда"><td>100</td><td>Гафуров Абдурасул Абдувахобович</td><td>Слесарь-монтажник</td></tr><tr data-name="шарипов азимчон муйдинович" data-position="оператор плазморезного оборудование" data-nomination="ветераны труда"><td>101</td><td>Шарипов Азимчон Муйдинович</td><td>Оператор плазморезного оборудование</td></tr><tr data-name="гафуров абдусамад абдувахобович" data-position="мастер" data-nomination="ветераны труда"><td>102</td><td>Гафуров Абдусамад Абдувахобович</td><td>Мастер</td></tr><tr data-name="норматов абдусалом сатторович" data-position="маляр" data-nomination="ветераны труда"><td>103</td><td>Норматов Абдусалом Сатторович</td><td>Маляр</td></tr><tr data-name="шарипов анвар усмонович" data-position="оператор" data-nomination="ветераны труда"><td>104</td><td>Шарипов Анвар Усмонович</td><td>Оператор</td></tr><tr data-name="абдувохидов шерози шарифчонович" data-position="оператор" data-nomination="ветераны труда"><td>105</td><td>Абдувохидов Шерози Шарифчонович</td><td>Оператор</td></tr><tr data-name="абдувохидов чамшед шарифчонович" data-position="руководитель" data-nomination="ветераны труда"><td>106</td><td>Абдувохидов Чамшед Шарифчонович</td><td>Руководитель</td></tr><tr data-name="шамсиев мансурчон муродович" data-position="начальник" data-nomination="ветераны труда"><td>107</td><td>Шамсиев Мансурчон Муродович</td><td>Начальник</td></tr><tr data-name="солиев равшан отакулович" data-position="оператор" data-nomination="ветераны труда"><td>108</td><td>Солиев Равшан Отакулович</td><td>Оператор</td></tr><tr data-name="солиева рувзон отакуловна" data-position="бригадир" data-nomination="ветераны труда"><td>109</td><td>Солиева Рувзон Отакуловна</td><td>Бригадир</td></tr><tr data-name="ахмедов сайфулло курбанович" data-position="заведующий складом" data-nomination="ветераны труда"><td>110</td><td>Ахмедов Сайфулло Курбанович</td><td>Заведующий складом</td></tr><tr data-name="ашуров шерали фаайзуллоевич" data-position="садчик" data-nomination="ветераны труда"><td>111</td><td>Ашуров Шерали Фаайзуллоевич</td><td>Садчик</td></tr><tr data-name="махкамов олимчон джурабоевич" data-position="кочегар" data-nomination="ветераны труда"><td>112</td><td>Махкамов Олимчон Джурабоевич</td><td>Кочегар</td></tr><tr data-name="рахматов фаррух усмонович" data-position="кочегар" data-nomination="ветераны труда"><td>113</td><td>Рахматов Фаррух Усмонович</td><td>Кочегар</td></tr><tr data-name="файзиев сайдулло нуруллоевич" data-position="кладчик" data-nomination="ветераны труда"><td>114</td><td>Файзиев Сайдулло Нуруллоевич</td><td>Кладчик</td></tr><tr data-name="окилов баротчон камолович" data-position="старший лаборант" data-nomination="ветераны труда"><td>115</td><td>Окилов Баротчон Камолович</td><td>Старший лаборант</td></tr><tr data-name="орипов фарходчон файзуллоевич" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>116</td><td>Орипов Фарходчон Файзуллоевич</td><td>Менеджер по продажам</td></tr><tr data-name="абдурахмонов абдуразок хасанович" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>117</td><td>Абдурахмонов Абдуразок Хасанович</td><td>Менеджер по продажам</td></tr><tr data-name="рахмонов умедчон турсунбоевич" data-position="руководитель" data-nomination="ветераны труда"><td>118</td><td>Рахмонов Умедчон Турсунбоевич</td><td>Руководитель</td></tr><tr data-name="махмудов мирзоисмоил мирзоганиевич" data-position="менеджер по продажам" data-nomination="ветераны труда"><td>119</td><td>Махмудов Мирзоисмоил Мирзоганиевич</td><td>Менеджер по продажам</td></tr><tr data-name="астонов шерзод кахрамончонович" data-position="мастер" data-nomination="ветераны труда"><td>120</td><td>Астонов Шерзод Кахрамончонович</td><td>Мастер</td></tr><tr data-name="самандаров вохидхоча шарифович" data-position="заведующий складом" data-nomination="ветераны труда"><td>121</td><td>Самандаров Вохидхоча Шарифович</td><td>Заведующий складом</td></tr><tr data-name="кодирова мавчуда абдусамеевна" data-position="вспомогательный работник" data-nomination="ветераны труда"><td>122</td><td>Кодирова Мавчуда Абдусамеевна</td><td>Вспомогательный работник</td></tr><tr data-name="бобоева мухайе негматчоновна" data-position="бригадир смены" data-nomination="ветераны труда"><td>123</td><td>Бобоева Мухайе Негматчоновна</td><td>Бригадир смены</td></tr><tr data-name="кундузова фотима абдучалиловна" data-position="упаковщик яиц" data-nomination="ветераны труда"><td>124</td><td>Кундузова Фотима Абдучалиловна</td><td>Упаковщик яиц</td></tr><tr data-name="абдуллаева майрам мансурбоевна" data-position="бригадир смены" data-nomination="ветераны труда"><td>125</td><td>Абдуллаева Майрам Мансурбоевна</td><td>Бригадир смены</td></tr><tr data-name="рахимшейхова азиза халиловна" data-position="упаковщик яиц" data-nomination="ветераны труда"><td>126</td><td>Рахимшейхова Азиза Халиловна</td><td>Упаковщик яиц</td></tr><tr data-name="умаров али абдукаюмович" data-position="электрик" data-nomination="ветераны труда"><td>127</td><td>Умаров Али Абдукаюмович</td><td>Электрик</td></tr><tr data-name="умаров бахтиёр алиевич" data-position="электрик" data-nomination="ветераны труда"><td>128</td><td>Умаров Бахтиёр Алиевич</td><td>Электрик</td></tr><tr data-name="рузиев бобир абдумаликович" data-position="электрик" data-nomination="ветераны труда"><td>129</td><td>Рузиев Бобир Абдумаликович</td><td>Электрик</td></tr><tr data-name="ахмеджанов нурулло махсуджонович" data-position="казначей" data-nomination="ветераны труда"><td>130</td><td>Ахмеджанов Нурулло Махсуджонович</td><td>Казначей</td></tr><tr data-name="саидходжаев наимходжа насимходжаевич" data-position="кассир-оператор" data-nomination="ветераны труда"><td>131</td><td>Саидходжаев Наимходжа Насимходжаевич</td><td>Кассир-оператор</td></tr><tr data-name="раджабов умеджон кодырович" data-position="расчетный бухгалтер" data-nomination="ветераны труда"><td>132</td><td>Раджабов Умеджон Кодырович</td><td>Расчетный бухгалтер</td></tr><tr data-name="исмоилова дилором нумонджоновна" data-position="расчетный бухгалтер" data-nomination="ветераны труда"><td>133</td><td>Исмоилова Дилором Нумонджоновна</td><td>Расчетный бухгалтер</td></tr><tr data-name="рашидова хамрочон хошимчоновна" data-position="расчетный бухгалтер" data-nomination="ветераны труда"><td>134</td><td>Рашидова Хамрочон Хошимчоновна</td><td>Расчетный бухгалтер</td></tr><tr data-name="негматов камолиддин усмончонович" data-position="администратор 1с" data-nomination="ветераны труда"><td>135</td><td>Негматов Камолиддин Усмончонович</td><td>Администратор 1С</td></tr><tr data-name="собиров фарход акрамович" data-position="главный бухгалтер" data-nomination="ветераны труда"><td>136</td><td>Собиров Фарход Акрамович</td><td>Главный бухгалтер</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="лучший по продажам">
+      <summary>
+        <div>
+          <h3>Лучший по продажам</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">75 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="анварзода муниса анвар" data-position="торговый представитель" data-nomination="лучший по продажам"><td>1</td><td>Анварзода Муниса Анвар</td><td>Торговый представитель</td></tr><tr data-name="бобоева фарзона сайнуридиновна" data-position="торговый представитель" data-nomination="лучший по продажам"><td>2</td><td>Бобоева Фарзона Сайнуридиновна</td><td>Торговый представитель</td></tr><tr data-name="бобоев равшан анварович" data-position="руководитель" data-nomination="лучший по продажам"><td>3</td><td>Бобоев Равшан Анварович</td><td>Руководитель</td></tr><tr data-name="каримов мирзоодил мирзофаррухович" data-position="торговый представитель" data-nomination="лучший по продажам"><td>4</td><td>Каримов Мирзоодил Мирзофаррухович</td><td>Торговый представитель</td></tr><tr data-name="алиев саидбурхон шухратович" data-position="супервайзер" data-nomination="лучший по продажам"><td>5</td><td>Алиев Саидбурхон Шухратович</td><td>Супервайзер</td></tr><tr data-name="марупова нигина олимовна" data-position="торговый представитель" data-nomination="лучший по продажам"><td>6</td><td>Марупова Нигина Олимовна</td><td>Торговый представитель</td></tr><tr data-name="исоев исмоилчон давлятович" data-position="торговый представитель" data-nomination="лучший по продажам"><td>7</td><td>Исоев Исмоилчон Давлятович</td><td>Торговый представитель</td></tr><tr data-name="шарипов урунбек сабурович" data-position="супервайзер" data-nomination="лучший по продажам"><td>8</td><td>Шарипов Урунбек Сабурович</td><td>Супервайзер</td></tr><tr data-name="шарипов мусульман алимурадович" data-position="торговый представитель" data-nomination="лучший по продажам"><td>9</td><td>Шарипов Мусульман Алимурадович</td><td>Торговый представитель</td></tr><tr data-name="саидов искандар шомуродович" data-position="торговый представитель" data-nomination="лучший по продажам"><td>10</td><td>Саидов Искандар Шомуродович</td><td>Торговый представитель</td></tr><tr data-name="назаров саидмухтор махмадюнусович" data-position="водитель экспедитор" data-nomination="лучший по продажам"><td>11</td><td>Назаров Саидмухтор Махмадюнусович</td><td>Водитель экспедитор</td></tr><tr data-name="чураев чура султонович" data-position="водитель экспедитор" data-nomination="лучший по продажам"><td>12</td><td>Чураев Чура Султонович</td><td>Водитель экспедитор</td></tr><tr data-name="рустамов мехриддин хабибуллоевич" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>13</td><td>Рустамов Мехриддин Хабибуллоевич</td><td>Менеджер по продажам</td></tr><tr data-name="камолов фахриддин мирчалолович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>14</td><td>Камолов Фахриддин Мирчалолович</td><td>Менеджер по продажам</td></tr><tr data-name="шохимов содикжон хикматович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>15</td><td>Шохимов Содикжон Хикматович</td><td>Складчик-продавец</td></tr><tr data-name="сарихонов мизроб мехмондустович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>16</td><td>Сарихонов Мизроб Мехмондустович</td><td>Складчик-продавец</td></tr><tr data-name="имомов али курбоналиевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>17</td><td>Имомов Али Курбоналиевич</td><td>Складчик-продавец</td></tr><tr data-name="азизов кудратулло гафорович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>18</td><td>Азизов Кудратулло Гафорович</td><td>Складчик-продавец</td></tr><tr data-name="нозилов рахмон шарифович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>19</td><td>Нозилов Рахмон Шарифович</td><td>Менеджер по продажам</td></tr><tr data-name="нозимзода хуршед" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>20</td><td>Нозимзода Хуршед</td><td>Менеджер по продажам</td></tr><tr data-name="мирзоев точиддин рахматуллоевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>21</td><td>Мирзоев Точиддин Рахматуллоевич</td><td>Складчик-продавец</td></tr><tr data-name="алиев асомуддин рачабович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>22</td><td>Алиев Асомуддин Рачабович</td><td>Складчик-продавец</td></tr><tr data-name="гурезов хасанчон холмадчонович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>23</td><td>Гурезов Хасанчон Холмадчонович</td><td>Складчик-продавец</td></tr><tr data-name="саидов муродали абдурауфович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>24</td><td>Саидов Муродали Абдурауфович</td><td>Складчик-продавец</td></tr><tr data-name="халиков иброхим абдурахимович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>25</td><td>Халиков Иброхим Абдурахимович</td><td>Менеджер по продажам</td></tr><tr data-name="рахматов акпар ахрорович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>26</td><td>Рахматов Акпар Ахрорович</td><td>Менеджер по продажам</td></tr><tr data-name="абдуллоев илхом баходурович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>27</td><td>Абдуллоев Илхом Баходурович</td><td>Менеджер по продажам</td></tr><tr data-name="шарипов бахриддин негматович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>28</td><td>Шарипов Бахриддин Негматович</td><td>Складчик-продавец</td></tr><tr data-name="худойдодов нуриддин сангинович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>29</td><td>Худойдодов Нуриддин Сангинович</td><td>Складчик-продавец</td></tr><tr data-name="валиев камолхон хасанхонович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>30</td><td>Валиев Камолхон Хасанхонович</td><td>Складчик-продавец</td></tr><tr data-name="набиев сухробчон саидбоевич" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>31</td><td>Набиев Сухробчон Саидбоевич</td><td>Менеджер по продажам</td></tr><tr data-name="косимов парвизхон орифхонович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>32</td><td>Косимов Парвизхон Орифхонович</td><td>Менеджер по продажам</td></tr><tr data-name="очилов анварчон ахроркулович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>33</td><td>Очилов Анварчон Ахроркулович</td><td>Менеджер по продажам</td></tr><tr data-name="кодиров абдухолик уктамович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>34</td><td>Кодиров Абдухолик Уктамович</td><td>Складчик-продавец</td></tr><tr data-name="худойназаров элдор илхомович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>35</td><td>Худойназаров Элдор Илхомович</td><td>Складчик-продавец</td></tr><tr data-name="хусейнов парвиз абдувахобович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>36</td><td>Хусейнов Парвиз Абдувахобович</td><td>Менеджер по продажам</td></tr><tr data-name="вохидов маъруфчон мавлонович" data-position="руководитель" data-nomination="лучший по продажам"><td>37</td><td>Вохидов Маъруфчон Мавлонович</td><td>Руководитель</td></tr><tr data-name="хасанов музаффар умарович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>38</td><td>Хасанов Музаффар Умарович</td><td>Менеджер по продажам</td></tr><tr data-name="холиков икром чумаевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>39</td><td>Холиков Икром Чумаевич</td><td>Складчик-продавец</td></tr><tr data-name="гоибназаров кутфиддин насридинович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>40</td><td>Гоибназаров Кутфиддин Насридинович</td><td>Складчик-продавец</td></tr><tr data-name="мавлонзода содирхон бобо" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>41</td><td>Мавлонзода Содирхон Бобо</td><td>Складчик-продавец</td></tr><tr data-name="хамроев абдувалӣ дустмуродович" data-position="водитель-продовец" data-nomination="лучший по продажам"><td>42</td><td>Хамроев Абдувалӣ Дустмуродович</td><td>Водитель-продовец</td></tr><tr data-name="мирзозода зикрулои зубайдуло" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>43</td><td>Мирзозода Зикрулои Зубайдуло</td><td>Менеджер по продажам</td></tr><tr data-name="каримов мансурчон рахимчонович" data-position="руководитель" data-nomination="лучший по продажам"><td>44</td><td>Каримов Мансурчон Рахимчонович</td><td>Руководитель</td></tr><tr data-name="хафизов искандар ибрахимович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>45</td><td>Хафизов Искандар Ибрахимович</td><td>Менеджер по продажам</td></tr><tr data-name="баротов сухроб чаъфарович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>46</td><td>Баротов Сухроб Чаъфарович</td><td>Менеджер по продажам</td></tr><tr data-name="хочаев бахтиёр эгамович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>47</td><td>Хочаев Бахтиёр Эгамович</td><td>Менеджер по продажам</td></tr><tr data-name="содиков саидбек субонкулович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>48</td><td>Содиков Саидбек Субонкулович</td><td>Складчик-продавец</td></tr><tr data-name="юсупов мирмахмад алимахмадович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>49</td><td>Юсупов Мирмахмад Алимахмадович</td><td>Складчик-продавец</td></tr><tr data-name="нурмахмад чахонгир" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>50</td><td>Нурмахмад Чахонгир</td><td>Складчик-продавец</td></tr><tr data-name="мирзоев рачабмурод валиевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>51</td><td>Мирзоев Рачабмурод Валиевич</td><td>Складчик-продавец</td></tr><tr data-name="мирзоев абдужабор абдурахимович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>52</td><td>Мирзоев Абдужабор Абдурахимович</td><td>Складчик-продавец</td></tr><tr data-name="ахмадзода нозимчони назар" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>53</td><td>Ахмадзода Нозимчони Назар</td><td>Складчик-продавец</td></tr><tr data-name="сайфиддинов ёкубчон тохирович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>54</td><td>Сайфиддинов Ёкубчон Тохирович</td><td>Складчик-продавец</td></tr><tr data-name="тошев разок сатторович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>55</td><td>Тошев Разок Сатторович</td><td>Складчик-продавец</td></tr><tr data-name="кодиров рамазон абдухолихович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>56</td><td>Кодиров Рамазон Абдухолихович</td><td>Складчик-продавец</td></tr><tr data-name="хакимов азимчон анварович" data-position="руководитель" data-nomination="лучший по продажам"><td>57</td><td>Хакимов Азимчон Анварович</td><td>Руководитель</td></tr><tr data-name="насриддинов рустамчон саидалиевич" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>58</td><td>Насриддинов Рустамчон Саидалиевич</td><td>Менеджер по продажам</td></tr><tr data-name="ёдгоров абдусаттор саидкомилович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>59</td><td>Ёдгоров Абдусаттор Саидкомилович</td><td>Менеджер по продажам</td></tr><tr data-name="абдурозики курбонзода" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>60</td><td>Абдурозики Курбонзода</td><td>Менеджер по продажам</td></tr><tr data-name="назирзода олимчон хоким" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>61</td><td>Назирзода Олимчон Хоким</td><td>Складчик-продавец</td></tr><tr data-name="набиев насимбой абдуллоевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>62</td><td>Набиев Насимбой Абдуллоевич</td><td>Складчик-продавец</td></tr><tr data-name="шоймардонов хурсандкул чамшедович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>63</td><td>Шоймардонов Хурсандкул Чамшедович</td><td>Складчик-продавец</td></tr><tr data-name="одинаев амирчон рахимчонович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>64</td><td>Одинаев Амирчон Рахимчонович</td><td>Складчик-продавец</td></tr><tr data-name="пиров хабибуло давлатович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>65</td><td>Пиров Хабибуло Давлатович</td><td>Складчик-продавец</td></tr><tr data-name="насимов олим косимович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>66</td><td>Насимов Олим Косимович</td><td>Складчик-продавец</td></tr><tr data-name="шарифов исфандиёр аскарович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>67</td><td>Шарифов Исфандиёр Аскарович</td><td>Менеджер по продажам</td></tr><tr data-name="холиков махсудин абдуназарович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>68</td><td>Холиков Махсудин Абдуназарович</td><td>Складчик-продавец</td></tr><tr data-name="кавгаков оятулло мукимчонович" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>69</td><td>Кавгаков Оятулло Мукимчонович</td><td>Складчик-продавец</td></tr><tr data-name="нусратов сайбилол махмадуллоевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>70</td><td>Нусратов Сайбилол Махмадуллоевич</td><td>Складчик-продавец</td></tr><tr data-name="сафаров шокир назарвалиевич" data-position="складчик-продавец" data-nomination="лучший по продажам"><td>71</td><td>Сафаров Шокир Назарвалиевич</td><td>Складчик-продавец</td></tr><tr data-name="муллоев мусинчон нуруллоевич" data-position="водитель экспедитор" data-nomination="лучший по продажам"><td>72</td><td>Муллоев Мусинчон Нуруллоевич</td><td>Водитель экспедитор</td></tr><tr data-name="абдурахмонӣ абдуфарид" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>73</td><td>Абдурахмонӣ Абдуфарид</td><td>Менеджер по продажам</td></tr><tr data-name="алиев амир анварович" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>74</td><td>Алиев Амир Анварович</td><td>Менеджер по продажам</td></tr><tr data-name="махмудов мирзоисмоил мирзоганиевич" data-position="менеджер по продажам" data-nomination="лучший по продажам"><td>75</td><td>Махмудов Мирзоисмоил Мирзоганиевич</td><td>Менеджер по продажам</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="лучший сотрудник года">
+      <summary>
+        <div>
+          <h3>Лучший сотрудник года</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">146 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="охунова азиза икромовна" data-position="руководитель направления маркетинга и рп" data-nomination="лучший сотрудник года"><td>1</td><td>Охунова Азиза Икромовна</td><td>Руководитель направления маркетинга и РП</td></tr><tr data-name="хочакулова диляра" data-position="сотрудник торгового зала" data-nomination="лучший сотрудник года"><td>2</td><td>Хочакулова Диляра</td><td>Сотрудник торгового зала</td></tr><tr data-name="содикова мохи" data-position="сотрудник торгового зала" data-nomination="лучший сотрудник года"><td>3</td><td>Содикова Мохи</td><td>Сотрудник торгового зала</td></tr><tr data-name="раупов абдуфарид абдухалимович" data-position="аудитор" data-nomination="лучший сотрудник года"><td>4</td><td>Раупов Абдуфарид Абдухалимович</td><td>Аудитор</td></tr><tr data-name="мирзомансуров мирзоахмад" data-position="снабженец" data-nomination="лучший сотрудник года"><td>5</td><td>Мирзомансуров Мирзоахмад</td><td>Снабженец</td></tr><tr data-name="ёрматов абдувосит шарифович" data-position="мастер" data-nomination="лучший сотрудник года"><td>6</td><td>Ёрматов Абдувосит Шарифович</td><td>Мастер</td></tr><tr data-name="тухтаев мазбудчон маруфчонович" data-position="водитель погрузчика" data-nomination="лучший сотрудник года"><td>7</td><td>Тухтаев Мазбудчон Маруфчонович</td><td>Водитель погрузчика</td></tr><tr data-name="кадыров иномчон комилджонович" data-position="логист" data-nomination="лучший сотрудник года"><td>8</td><td>Кадыров Иномчон Комилджонович</td><td>Логист</td></tr><tr data-name="султонов рустам икромович" data-position="водитель погрузчика" data-nomination="лучший сотрудник года"><td>9</td><td>Султонов Рустам Икромович</td><td>Водитель погрузчика</td></tr><tr data-name="мирсаидов азимчон хакимович" data-position="водитель грузового автомобиля" data-nomination="лучший сотрудник года"><td>10</td><td>Мирсаидов Азимчон Хакимович</td><td>Водитель грузового автомобиля</td></tr><tr data-name="хочаев исматчон иномович" data-position="электрик" data-nomination="лучший сотрудник года"><td>11</td><td>Хочаев Исматчон Иномович</td><td>Электрик</td></tr><tr data-name="пулотова мадина валиевна" data-position="повар" data-nomination="лучший сотрудник года"><td>12</td><td>Пулотова Мадина Валиевна</td><td>Повар</td></tr><tr data-name="чабборова мунира ахмадовна" data-position="техничка" data-nomination="лучший сотрудник года"><td>13</td><td>Чабборова Мунира Ахмадовна</td><td>Техничка</td></tr><tr data-name="мамадчонова назира махсудчонована" data-position="повар" data-nomination="лучший сотрудник года"><td>14</td><td>Мамадчонова Назира Махсудчонована</td><td>Повар</td></tr><tr data-name="вохидова саодат хотамовна" data-position="техничка" data-nomination="лучший сотрудник года"><td>15</td><td>Вохидова Саодат Хотамовна</td><td>Техничка</td></tr><tr data-name="чураев муродчон негматович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>16</td><td>Чураев Муродчон Негматович</td><td>Вспомогательный работник</td></tr><tr data-name="шодиева салимахон дадочоновна" data-position="шеф повар" data-nomination="лучший сотрудник года"><td>17</td><td>Шодиева Салимахон Дадочоновна</td><td>Шеф повар</td></tr><tr data-name="юсупов юсуфчон зафарович" data-position="старший лаборант" data-nomination="лучший сотрудник года"><td>18</td><td>Юсупов Юсуфчон Зафарович</td><td>Старший лаборант</td></tr><tr data-name="махсудов илёсхон махмудович" data-position="специалист отк" data-nomination="лучший сотрудник года"><td>19</td><td>Махсудов Илёсхон Махмудович</td><td>Специалист ОТК</td></tr><tr data-name="махмудов наимчон саломович" data-position="ведущий разработчик" data-nomination="лучший сотрудник года"><td>20</td><td>Махмудов Наимчон Саломович</td><td>Ведущий разработчик</td></tr><tr data-name="носирова мафтуна турдиевна" data-position="птицевод" data-nomination="лучший сотрудник года"><td>21</td><td>Носирова Мафтуна Турдиевна</td><td>Птицевод</td></tr><tr data-name="мехтарзод сухраварди" data-position="помощник" data-nomination="лучший сотрудник года"><td>22</td><td>Мехтарзод Сухраварди</td><td>Помощник</td></tr><tr data-name="икромов хайруллочон абдуллочонович" data-position="слесарь" data-nomination="лучший сотрудник года"><td>23</td><td>Икромов Хайруллочон Абдуллочонович</td><td>Слесарь</td></tr><tr data-name="абдурахмонов мазбудчон махмудович" data-position="технолог" data-nomination="лучший сотрудник года"><td>24</td><td>Абдурахмонов Мазбудчон Махмудович</td><td>Технолог</td></tr><tr data-name="хобилов диловарчон абдурауфович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>25</td><td>Хобилов Диловарчон Абдурауфович</td><td>Вспомогательный работник</td></tr><tr data-name="саидов зайнобиддин шахобиддинович" data-position="инженер-механик" data-nomination="лучший сотрудник года"><td>26</td><td>Саидов Зайнобиддин Шахобиддинович</td><td>Инженер-механик</td></tr><tr data-name="кирпа сергей николаевич" data-position="главный инженер" data-nomination="лучший сотрудник года"><td>27</td><td>Кирпа Сергей Николаевич</td><td>Главный инженер</td></tr><tr data-name="содиков олимчон дадочонович" data-position="мастер" data-nomination="лучший сотрудник года"><td>28</td><td>Содиков Олимчон Дадочонович</td><td>Мастер</td></tr><tr data-name="шокиров шохмурод шарифчонович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>29</td><td>Шокиров Шохмурод Шарифчонович</td><td>Вспомогательный работник</td></tr><tr data-name="эргашев хуршедчон махмудчонович" data-position="бригадир" data-nomination="лучший сотрудник года"><td>30</td><td>Эргашев Хуршедчон Махмудчонович</td><td>Бригадир</td></tr><tr data-name="бобочонов халимчон рахимчонович" data-position="электросварщик" data-nomination="лучший сотрудник года"><td>31</td><td>Бобочонов Халимчон Рахимчонович</td><td>Электросварщик</td></tr><tr data-name="мусобоев акрамчон сайдуллоевич" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>32</td><td>Мусобоев Акрамчон Сайдуллоевич</td><td>Вспомогательный работник</td></tr><tr data-name="отачонов чамшед олимович" data-position="бригадир" data-nomination="лучший сотрудник года"><td>33</td><td>Отачонов Чамшед Олимович</td><td>Бригадир</td></tr><tr data-name="чамолиён озодмехр дустмуродзода" data-position="инженер-проектировщик" data-nomination="лучший сотрудник года"><td>34</td><td>Чамолиён Озодмехр Дустмуродзода</td><td>Инженер-проектировщик</td></tr><tr data-name="абдугаффоров фаррух курбоназарович" data-position="строитель" data-nomination="лучший сотрудник года"><td>35</td><td>Абдугаффоров Фаррух Курбоназарович</td><td>Строитель</td></tr><tr data-name="кобилов косимчон кобилчонович" data-position="строитель" data-nomination="лучший сотрудник года"><td>36</td><td>Кобилов Косимчон Кобилчонович</td><td>Строитель</td></tr><tr data-name="турдиев аъзамчон аюбович" data-position="бригадир" data-nomination="лучший сотрудник года"><td>37</td><td>Турдиев Аъзамчон Аюбович</td><td>Бригадир</td></tr><tr data-name="набиев абдурахмон чурабекович" data-position="логист" data-nomination="лучший сотрудник года"><td>38</td><td>Набиев Абдурахмон Чурабекович</td><td>Логист</td></tr><tr data-name="хомидов иброхимхоча исмоилхочаевич" data-position="координатор" data-nomination="лучший сотрудник года"><td>39</td><td>Хомидов Иброхимхоча Исмоилхочаевич</td><td>Координатор</td></tr><tr data-name="рахмонов мухаммадчон усмонович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>40</td><td>Рахмонов Мухаммадчон Усмонович</td><td>Грузчик</td></tr><tr data-name="рахмонов саидчон хусейнович" data-position="заведующий складом" data-nomination="лучший сотрудник года"><td>41</td><td>Рахмонов Саидчон Хусейнович</td><td>Заведующий складом</td></tr><tr data-name="ашурматов халилбек хошимович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>42</td><td>Ашурматов Халилбек Хошимович</td><td>Грузчик</td></tr><tr data-name="хабибов хамидулло яхёевич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>43</td><td>Хабибов Хамидулло Яхёевич</td><td>Грузчик</td></tr><tr data-name="шарипов абдурауф абдуворисович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>44</td><td>Шарипов Абдурауф Абдуворисович</td><td>Грузчик</td></tr><tr data-name="каххоров даврончон мансурчонович" data-position="кладовщик" data-nomination="лучший сотрудник года"><td>45</td><td>Каххоров Даврончон Мансурчонович</td><td>Кладовщик</td></tr><tr data-name="чабборов гулмурод абдугафорич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>46</td><td>Чабборов Гулмурод Абдугафорич</td><td>Грузчик</td></tr><tr data-name="фатуллоев саидхоча солихочаевич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>47</td><td>Фатуллоев Саидхоча Солихочаевич</td><td>Грузчик</td></tr><tr data-name="гулматов хусниддин чангиевич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>48</td><td>Гулматов Хусниддин Чангиевич</td><td>Грузчик</td></tr><tr data-name="рузибоев хуршедчон абдучалилович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>49</td><td>Рузибоев Хуршедчон Абдучалилович</td><td>Грузчик</td></tr><tr data-name="юлдошев чурабек хабибулоевич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>50</td><td>Юлдошев Чурабек Хабибулоевич</td><td>Грузчик</td></tr><tr data-name="назаров хусейн шарифчонович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>51</td><td>Назаров Хусейн Шарифчонович</td><td>Грузчик</td></tr><tr data-name="кодиров алишер абдувалиевич" data-position="грузчик" data-nomination="лучший сотрудник года"><td>52</td><td>Кодиров Алишер Абдувалиевич</td><td>Грузчик</td></tr><tr data-name="латифзода неъматулло изатулло" data-position="грузчик" data-nomination="лучший сотрудник года"><td>53</td><td>Латифзода Неъматулло Изатулло</td><td>Грузчик</td></tr><tr data-name="зокирбоев зафарчон зокирбоевич" data-position="оформитель" data-nomination="лучший сотрудник года"><td>54</td><td>Зокирбоев Зафарчон Зокирбоевич</td><td>Оформитель</td></tr><tr data-name="арипов файзулло муталибович" data-position="охранник" data-nomination="лучший сотрудник года"><td>55</td><td>Арипов Файзулло Муталибович</td><td>Охранник</td></tr><tr data-name="каримов аъзамчон махкамович" data-position="охранник" data-nomination="лучший сотрудник года"><td>56</td><td>Каримов Аъзамчон Махкамович</td><td>Охранник</td></tr><tr data-name="абдусатторова махсуда абдурауфовна" data-position="диспетчер" data-nomination="лучший сотрудник года"><td>57</td><td>Абдусатторова Махсуда Абдурауфовна</td><td>Диспетчер</td></tr><tr data-name="болтаев гулом темурович" data-position="охранник" data-nomination="лучший сотрудник года"><td>58</td><td>Болтаев Гулом Темурович</td><td>Охранник</td></tr><tr data-name="рахимов далерчон темурович" data-position="охранник" data-nomination="лучший сотрудник года"><td>59</td><td>Рахимов Далерчон Темурович</td><td>Охранник</td></tr><tr data-name="муллобоев хасан курбонович" data-position="охранник" data-nomination="лучший сотрудник года"><td>60</td><td>Муллобоев Хасан Курбонович</td><td>Охранник</td></tr><tr data-name="негматов даврон абдурахимович" data-position="охранник" data-nomination="лучший сотрудник года"><td>61</td><td>Негматов Даврон Абдурахимович</td><td>Охранник</td></tr><tr data-name="ашрапов фируз" data-position="кассир" data-nomination="лучший сотрудник года"><td>62</td><td>Ашрапов Фируз</td><td>Кассир</td></tr><tr data-name="ибрагимова зарина абдуазизовна" data-position="hr generalist" data-nomination="лучший сотрудник года"><td>63</td><td>Ибрагимова Зарина Абдуазизовна</td><td>HR Generalist</td></tr><tr data-name="абдуллочонов акбарчон абдуллочонович" data-position="кассир" data-nomination="лучший сотрудник года"><td>64</td><td>Абдуллочонов Акбарчон Абдуллочонович</td><td>Кассир</td></tr><tr data-name="абдусаторов маъруфчон абдусамадович" data-position="оператор" data-nomination="лучший сотрудник года"><td>65</td><td>Абдусаторов Маъруфчон Абдусамадович</td><td>Оператор</td></tr><tr data-name="мамадчонова патма хакимбайовна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>66</td><td>Мамадчонова Патма Хакимбайовна</td><td>Фасовщица</td></tr><tr data-name="чураев фирдавс рахматович" data-position="элеваторщик" data-nomination="лучший сотрудник года"><td>67</td><td>Чураев Фирдавс Рахматович</td><td>Элеваторщик</td></tr><tr data-name="мухторова махсуда ёкубчоновна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>68</td><td>Мухторова Махсуда Ёкубчоновна</td><td>Фасовщица</td></tr><tr data-name="атаев зафарчон ибодуллаевич" data-position="бухгалтер-кассир" data-nomination="лучший сотрудник года"><td>69</td><td>Атаев Зафарчон Ибодуллаевич</td><td>Бухгалтер-кассир</td></tr><tr data-name="рахмонов собирчон йусуфович" data-position="технолог" data-nomination="лучший сотрудник года"><td>70</td><td>Рахмонов Собирчон Йусуфович</td><td>Технолог</td></tr><tr data-name="олимов олимчон зафарович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>71</td><td>Олимов Олимчон Зафарович</td><td>Старший оператор</td></tr><tr data-name="болтаев бахромчон абдурашидович" data-position="начальник смены" data-nomination="лучший сотрудник года"><td>72</td><td>Болтаев Бахромчон Абдурашидович</td><td>Начальник смены</td></tr><tr data-name="махмудбоев мукимчон мухсинчонович" data-position="заведующий лабораторией" data-nomination="лучший сотрудник года"><td>73</td><td>Махмудбоев Мукимчон Мухсинчонович</td><td>Заведующий лабораторией</td></tr><tr data-name="исроилов шокирчон латифович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>74</td><td>Исроилов Шокирчон Латифович</td><td>Старший оператор</td></tr><tr data-name="султонов чанобиддин мукумчонович" data-position="оператор" data-nomination="лучший сотрудник года"><td>75</td><td>Султонов Чанобиддин Мукумчонович</td><td>Оператор</td></tr><tr data-name="ёрматова шамшинисо хабибуллоевна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>76</td><td>Ёрматова Шамшинисо Хабибуллоевна</td><td>Фасовщица</td></tr><tr data-name="ашматов бахромчон давронович" data-position="оператор" data-nomination="лучший сотрудник года"><td>77</td><td>Ашматов Бахромчон Давронович</td><td>Оператор</td></tr><tr data-name="хайдарова наргиза шарифовна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>78</td><td>Хайдарова Наргиза Шарифовна</td><td>Фасовщица</td></tr><tr data-name="эргашев шухратчон алишерович" data-position="грузчик" data-nomination="лучший сотрудник года"><td>79</td><td>Эргашев Шухратчон Алишерович</td><td>Грузчик</td></tr><tr data-name="абдухамидов абубакр олимчонович" data-position="технолог" data-nomination="лучший сотрудник года"><td>80</td><td>Абдухамидов Абубакр Олимчонович</td><td>Технолог</td></tr><tr data-name="шодиев аъзам абдурахмонович" data-position="оператор" data-nomination="лучший сотрудник года"><td>81</td><td>Шодиев Аъзам Абдурахмонович</td><td>Оператор</td></tr><tr data-name="исоков мансурчон маъруфчонович" data-position="оператор" data-nomination="лучший сотрудник года"><td>82</td><td>Исоков Мансурчон Маъруфчонович</td><td>Оператор</td></tr><tr data-name="абдуллоева ойбуви абдувахобовна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>83</td><td>Абдуллоева Ойбуви Абдувахобовна</td><td>Фасовщица</td></tr><tr data-name="пулотов далер сидикович" data-position="оператор" data-nomination="лучший сотрудник года"><td>84</td><td>Пулотов Далер Сидикович</td><td>Оператор</td></tr><tr data-name="гафурова мухайё юлдошевна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>85</td><td>Гафурова Мухайё Юлдошевна</td><td>Фасовщица</td></tr><tr data-name="тусматов акмалчон рахматчонович" data-position="начальник смены" data-nomination="лучший сотрудник года"><td>86</td><td>Тусматов Акмалчон Рахматчонович</td><td>Начальник смены</td></tr><tr data-name="эргашев дилшодчон хайруллоевич" data-position="технолог" data-nomination="лучший сотрудник года"><td>87</td><td>Эргашев Дилшодчон Хайруллоевич</td><td>Технолог</td></tr><tr data-name="орипов алишер вохидович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>88</td><td>Орипов Алишер Вохидович</td><td>Старший оператор</td></tr><tr data-name="абдуганиева нигора абдухоликовна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>89</td><td>Абдуганиева Нигора Абдухоликовна</td><td>Фасовщица</td></tr><tr data-name="баходурова сулхия азизхочаевна" data-position="руководитель" data-nomination="лучший сотрудник года"><td>90</td><td>Баходурова Сулхия Азизхочаевна</td><td>Руководитель</td></tr><tr data-name="файзиев иброгимчон илхомович" data-position="маркетолог" data-nomination="лучший сотрудник года"><td>91</td><td>Файзиев Иброгимчон Илхомович</td><td>Маркетолог</td></tr><tr data-name="мазбутов мехроч аюбчонович" data-position="специалист" data-nomination="лучший сотрудник года"><td>92</td><td>Мазбутов Мехроч Аюбчонович</td><td>Специалист</td></tr><tr data-name="уматова малика валиевна" data-position="методолог" data-nomination="лучший сотрудник года"><td>93</td><td>Уматова Малика Валиевна</td><td>Методолог</td></tr><tr data-name="азимова дилноза акмаловна" data-position="специалист" data-nomination="лучший сотрудник года"><td>94</td><td>Азимова Дилноза Акмаловна</td><td>Специалист</td></tr><tr data-name="зокирова зебочон абдуазимовна" data-position="hr bp" data-nomination="лучший сотрудник года"><td>95</td><td>Зокирова Зебочон Абдуазимовна</td><td>HR BP</td></tr><tr data-name="абдувалиев шавкатчон шухратчонович" data-position="юрист" data-nomination="лучший сотрудник года"><td>96</td><td>Абдувалиев Шавкатчон Шухратчонович</td><td>Юрист</td></tr><tr data-name="искандарова мадинахон хошимчоновна" data-position="старший специалист" data-nomination="лучший сотрудник года"><td>97</td><td>Искандарова Мадинахон Хошимчоновна</td><td>Старший специалист</td></tr><tr data-name="абдукаримов ахмадали абдуллочонович" data-position="заведующий складом" data-nomination="лучший сотрудник года"><td>98</td><td>Абдукаримов Ахмадали Абдуллочонович</td><td>Заведующий складом</td></tr><tr data-name="рачабов рустамчон равшанчонович" data-position="мастер" data-nomination="лучший сотрудник года"><td>99</td><td>Рачабов Рустамчон Равшанчонович</td><td>Мастер</td></tr><tr data-name="рахимов зафарчон чурабоевич" data-position="оператор кательной" data-nomination="лучший сотрудник года"><td>100</td><td>Рахимов Зафарчон Чурабоевич</td><td>Оператор кательной</td></tr><tr data-name="аличонов масрурчон шухратчонович" data-position="лаборант" data-nomination="лучший сотрудник года"><td>101</td><td>Аличонов Масрурчон Шухратчонович</td><td>Лаборант</td></tr><tr data-name="эргашев акбарали аъзамчонович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>102</td><td>Эргашев Акбарали Аъзамчонович</td><td>Старший оператор</td></tr><tr data-name="пулотов бахтиёр абдухамидович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>103</td><td>Пулотов Бахтиёр Абдухамидович</td><td>Вспомогательный работник</td></tr><tr data-name="носиров гуфрончон абдуллоевич" data-position="оператор" data-nomination="лучший сотрудник года"><td>104</td><td>Носиров Гуфрончон Абдуллоевич</td><td>Оператор</td></tr><tr data-name="орипов рахимчон акпарович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>105</td><td>Орипов Рахимчон Акпарович</td><td>Старший оператор</td></tr><tr data-name="кодиров абдугафур абдугаффорович" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>106</td><td>Кодиров Абдугафур Абдугаффорович</td><td>Старший оператор</td></tr><tr data-name="кенчаева шоиста насруллоевна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>107</td><td>Кенчаева Шоиста Насруллоевна</td><td>Фасовщица</td></tr><tr data-name="бобочонова азиза мамадчоновна" data-position="фасовщица" data-nomination="лучший сотрудник года"><td>108</td><td>Бобочонова Азиза Мамадчоновна</td><td>Фасовщица</td></tr><tr data-name="асатуллоев собирчон туйчибоевич" data-position="старший оператор" data-nomination="лучший сотрудник года"><td>109</td><td>Асатуллоев Собирчон Туйчибоевич</td><td>Старший оператор</td></tr><tr data-name="гиясов алиакбар мухаммадхонович" data-position="инженер" data-nomination="лучший сотрудник года"><td>110</td><td>Гиясов Алиакбар Мухаммадхонович</td><td>Инженер</td></tr><tr data-name="хомидов муродчон рафикчонович" data-position="инженер" data-nomination="лучший сотрудник года"><td>111</td><td>Хомидов Муродчон Рафикчонович</td><td>Инженер</td></tr><tr data-name="темуров шавкатчон озодович" data-position="слесарь-монтажник" data-nomination="лучший сотрудник года"><td>112</td><td>Темуров Шавкатчон Озодович</td><td>Слесарь-монтажник</td></tr><tr data-name="ниёзов абдурауф кенчабоевич" data-position="электросварщик" data-nomination="лучший сотрудник года"><td>113</td><td>Ниёзов Абдурауф Кенчабоевич</td><td>Электросварщик</td></tr><tr data-name="юлчиев сухробчон рустамчонович" data-position="оператор плазморезного оборудование" data-nomination="лучший сотрудник года"><td>114</td><td>Юлчиев Сухробчон Рустамчонович</td><td>Оператор плазморезного оборудование</td></tr><tr data-name="кодиров элмурод зафарчонович" data-position="оператор" data-nomination="лучший сотрудник года"><td>115</td><td>Кодиров Элмурод Зафарчонович</td><td>Оператор</td></tr><tr data-name="солиев мухамадчон абдурасулович" data-position="электросварщик" data-nomination="лучший сотрудник года"><td>116</td><td>Солиев Мухамадчон Абдурасулович</td><td>Электросварщик</td></tr><tr data-name="темуров мухсин бобочонович" data-position="мастер" data-nomination="лучший сотрудник года"><td>117</td><td>Темуров Мухсин Бобочонович</td><td>Мастер</td></tr><tr data-name="пулотов расулчон рахматович" data-position="инженер-проектировщик" data-nomination="лучший сотрудник года"><td>118</td><td>Пулотов Расулчон Рахматович</td><td>Инженер-проектировщик</td></tr><tr data-name="орзиев махмудчон махсудчонович" data-position="оператор" data-nomination="лучший сотрудник года"><td>119</td><td>Орзиев Махмудчон Махсудчонович</td><td>Оператор</td></tr><tr data-name="чамолов шарифчон илхомчонович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>120</td><td>Чамолов Шарифчон Илхомчонович</td><td>Вспомогательный работник</td></tr><tr data-name="усмонов гафурчон соличонович" data-position="вспомогательный работник" data-nomination="лучший сотрудник года"><td>121</td><td>Усмонов Гафурчон Соличонович</td><td>Вспомогательный работник</td></tr><tr data-name="шарифов сулаймонхоча саидхочаевич" data-position="оператор" data-nomination="лучший сотрудник года"><td>122</td><td>Шарифов Сулаймонхоча Саидхочаевич</td><td>Оператор</td></tr><tr data-name="бобокалонова эъзозхон усмоновна" data-position="бригадир" data-nomination="лучший сотрудник года"><td>123</td><td>Бобокалонова Эъзозхон Усмоновна</td><td>Бригадир</td></tr><tr data-name="махкамов олимчон джурабоевич" data-position="кочегар" data-nomination="лучший сотрудник года"><td>124</td><td>Махкамов Олимчон Джурабоевич</td><td>Кочегар</td></tr><tr data-name="мамадчонов аъзамчон анварчонович" data-position="лаборант-экспедитор" data-nomination="лучший сотрудник года"><td>125</td><td>Мамадчонов Аъзамчон Анварчонович</td><td>Лаборант-экспедитор</td></tr><tr data-name="иброхимов дилшод иброхимович" data-position="специалист" data-nomination="лучший сотрудник года"><td>126</td><td>Иброхимов Дилшод Иброхимович</td><td>Специалист</td></tr><tr data-name="юсупов фирдавс абдухалилович" data-position="ветеринарный врач" data-nomination="лучший сотрудник года"><td>127</td><td>Юсупов Фирдавс Абдухалилович</td><td>Ветеринарный врач</td></tr><tr data-name="шарипов фирдавс ибрагимович" data-position="заведующий складом" data-nomination="лучший сотрудник года"><td>128</td><td>Шарипов Фирдавс Ибрагимович</td><td>Заведующий складом</td></tr><tr data-name="почоева ойшахон ахроровна" data-position="упаковщик яиц" data-nomination="лучший сотрудник года"><td>129</td><td>Почоева Ойшахон Ахроровна</td><td>Упаковщик яиц</td></tr><tr data-name="сулаймонова заррина каюмовна" data-position="врач" data-nomination="лучший сотрудник года"><td>130</td><td>Сулаймонова Заррина Каюмовна</td><td>Врач</td></tr><tr data-name="умаров бахтиёр алиевич" data-position="электрик" data-nomination="лучший сотрудник года"><td>131</td><td>Умаров Бахтиёр Алиевич</td><td>Электрик</td></tr><tr data-name="шарипов махсудчон шарифович" data-position="электрик" data-nomination="лучший сотрудник года"><td>132</td><td>Шарипов Махсудчон Шарифович</td><td>Электрик</td></tr><tr data-name="хошимов фарход фатуллоевич" data-position="старший специалист" data-nomination="лучший сотрудник года"><td>133</td><td>Хошимов Фарход Фатуллоевич</td><td>Старший специалист</td></tr><tr data-name="каримов чамшед мунирчонович" data-position="экономист" data-nomination="лучший сотрудник года"><td>134</td><td>Каримов Чамшед Мунирчонович</td><td>Экономист</td></tr><tr data-name="нурматов азимчон абдукаримович" data-position="бухгалтер" data-nomination="лучший сотрудник года"><td>135</td><td>Нурматов Азимчон Абдукаримович</td><td>Бухгалтер</td></tr><tr data-name="косимов умедчон гуфрончонович" data-position="экономист" data-nomination="лучший сотрудник года"><td>136</td><td>Косимов Умедчон Гуфрончонович</td><td>Экономист</td></tr><tr data-name="раджабов умеджон кодырович" data-position="расчетный бухгалтер" data-nomination="лучший сотрудник года"><td>137</td><td>Раджабов Умеджон Кодырович</td><td>Расчетный бухгалтер</td></tr><tr data-name="шодибоев саидхуча салимхучаевич" data-position="бухгалтер" data-nomination="лучший сотрудник года"><td>138</td><td>Шодибоев Саидхуча Салимхучаевич</td><td>Бухгалтер</td></tr><tr data-name="хакими фирдавс гайратзода" data-position="бухгалтер-реализатор" data-nomination="лучший сотрудник года"><td>139</td><td>Хакими Фирдавс Гайратзода</td><td>Бухгалтер-реализатор</td></tr><tr data-name="низомиддинов манучехр чамшедчонович" data-position="бухгалтер-реализатор" data-nomination="лучший сотрудник года"><td>140</td><td>Низомиддинов Манучехр Чамшедчонович</td><td>Бухгалтер-реализатор</td></tr><tr data-name="кодиров наимчон ахроржонович" data-position="бухгалтер" data-nomination="лучший сотрудник года"><td>141</td><td>Кодиров Наимчон Ахроржонович</td><td>Бухгалтер</td></tr><tr data-name="орипов мазбудчон мубинчонович" data-position="производственный бухгалтер" data-nomination="лучший сотрудник года"><td>142</td><td>Орипов Мазбудчон Мубинчонович</td><td>Производственный бухгалтер</td></tr><tr data-name="узоков баходур бахтиёрович" data-position="производственный бухгалтер" data-nomination="лучший сотрудник года"><td>143</td><td>Узоков Баходур Бахтиёрович</td><td>Производственный бухгалтер</td></tr><tr data-name="абдуллоев мансурчон мухторчонович" data-position="производственный бухгалтер" data-nomination="лучший сотрудник года"><td>144</td><td>Абдуллоев Мансурчон Мухторчонович</td><td>Производственный бухгалтер</td></tr><tr data-name="гафоров азимчон гайбуллоевич" data-position="специалист" data-nomination="лучший сотрудник года"><td>145</td><td>Гафоров Азимчон Гайбуллоевич</td><td>Специалист</td></tr><tr data-name="холтураев акмал бобоназарович" data-position="специалист" data-nomination="лучший сотрудник года"><td>146</td><td>Холтураев Акмал Бобоназарович</td><td>Специалист</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="приверженец корпоративных ценностей компании">
+      <summary>
+        <div>
+          <h3>Приверженец корпоративных ценностей компании</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">24 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="мамадчонов фирдавс мукимчонович" data-position="методолог-аналитик" data-nomination="приверженец корпоративных ценностей компании"><td>1</td><td>Мамадчонов Фирдавс Мукимчонович</td><td>Методолог-аналитик</td></tr><tr data-name="суфиев азамат турсунович" data-position="супервайзер" data-nomination="приверженец корпоративных ценностей компании"><td>2</td><td>Суфиев Азамат Турсунович</td><td>Супервайзер</td></tr><tr data-name="бобоев равшан анварович" data-position="руководитель" data-nomination="приверженец корпоративных ценностей компании"><td>3</td><td>Бобоев Равшан Анварович</td><td>Руководитель</td></tr><tr data-name="бобочонов назар орифчонович" data-position="начальник" data-nomination="приверженец корпоративных ценностей компании"><td>4</td><td>Бобочонов Назар Орифчонович</td><td>Начальник</td></tr><tr data-name="бобоев хуршед шавкатчонович" data-position="системный администратор" data-nomination="приверженец корпоративных ценностей компании"><td>5</td><td>Бобоев Хуршед Шавкатчонович</td><td>Системный администратор</td></tr><tr data-name="абдурахмонов мазбудчон махмудович" data-position="технолог" data-nomination="приверженец корпоративных ценностей компании"><td>6</td><td>Абдурахмонов Мазбудчон Махмудович</td><td>Технолог</td></tr><tr data-name="махкамов махмудчон комилович" data-position="электросварщик" data-nomination="приверженец корпоративных ценностей компании"><td>7</td><td>Махкамов Махмудчон Комилович</td><td>Электросварщик</td></tr><tr data-name="зарифи мирзобаховаддин мусозода" data-position="координатор" data-nomination="приверженец корпоративных ценностей компании"><td>8</td><td>Зарифи Мирзобаховаддин Мусозода</td><td>Координатор</td></tr><tr data-name="дадобоев шохрухчон шухратчонович" data-position="оформитель" data-nomination="приверженец корпоративных ценностей компании"><td>9</td><td>Дадобоев Шохрухчон Шухратчонович</td><td>Оформитель</td></tr><tr data-name="абдусаломов хуршед абдукахорович" data-position="менеджер по продажам" data-nomination="приверженец корпоративных ценностей компании"><td>10</td><td>Абдусаломов Хуршед Абдукахорович</td><td>Менеджер по продажам</td></tr><tr data-name="назаров рамазон нуралиевич" data-position="менеджер по продажам" data-nomination="приверженец корпоративных ценностей компании"><td>11</td><td>Назаров Рамазон Нуралиевич</td><td>Менеджер по продажам</td></tr><tr data-name="гафуров собирчон султонович" data-position="кассир-оператор" data-nomination="приверженец корпоративных ценностей компании"><td>12</td><td>Гафуров Собирчон Султонович</td><td>Кассир-оператор</td></tr><tr data-name="чалилов махсудчон шукурович" data-position="оператор" data-nomination="приверженец корпоративных ценностей компании"><td>13</td><td>Чалилов Махсудчон Шукурович</td><td>Оператор</td></tr><tr data-name="зиёев сарварчон зиёбобоевич" data-position="главный механик" data-nomination="приверженец корпоративных ценностей компании"><td>14</td><td>Зиёев Сарварчон Зиёбобоевич</td><td>Главный механик</td></tr><tr data-name="саидов аюбчон муминчонович" data-position="начальник производства" data-nomination="приверженец корпоративных ценностей компании"><td>15</td><td>Саидов Аюбчон Муминчонович</td><td>Начальник производства</td></tr><tr data-name="солибоева мутрибахон олимчоновна" data-position="менеджер" data-nomination="приверженец корпоративных ценностей компании"><td>16</td><td>Солибоева Мутрибахон Олимчоновна</td><td>Менеджер</td></tr><tr data-name="юнусов фирдавсхон хайруллоевич" data-position="координатор" data-nomination="приверженец корпоративных ценностей компании"><td>17</td><td>Юнусов Фирдавсхон Хайруллоевич</td><td>Координатор</td></tr><tr data-name="курбонов субхончон юсупович" data-position="главный технолог" data-nomination="приверженец корпоративных ценностей компании"><td>18</td><td>Курбонов Субхончон Юсупович</td><td>Главный технолог</td></tr><tr data-name="домуллоев кобилчон комилчонович" data-position="мастер" data-nomination="приверженец корпоративных ценностей компании"><td>19</td><td>Домуллоев Кобилчон Комилчонович</td><td>Мастер</td></tr><tr data-name="азимов муртазахон саиднаимович" data-position="заведующий складом" data-nomination="приверженец корпоративных ценностей компании"><td>20</td><td>Азимов Муртазахон Саиднаимович</td><td>Заведующий складом</td></tr><tr data-name="ахмедов мухаммадчон чурабоевич" data-position="слесарь" data-nomination="приверженец корпоративных ценностей компании"><td>21</td><td>Ахмедов Мухаммадчон Чурабоевич</td><td>Слесарь</td></tr><tr data-name="саидов саидахрор алиевич" data-position="специалист" data-nomination="приверженец корпоративных ценностей компании"><td>22</td><td>Саидов Саидахрор Алиевич</td><td>Специалист</td></tr><tr data-name="ниёзов фозилчон халимович" data-position="электрик" data-nomination="приверженец корпоративных ценностей компании"><td>23</td><td>Ниёзов Фозилчон Халимович</td><td>Электрик</td></tr><tr data-name="чумаев аминчон азимчонович" data-position="координатор" data-nomination="приверженец корпоративных ценностей компании"><td>24</td><td>Чумаев Аминчон Азимчонович</td><td>Координатор</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="тренер года">
+      <summary>
+        <div>
+          <h3>Тренер года</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">2 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="рабиев илхомджон бобочонович" data-position="главный аудитор" data-nomination="тренер года"><td>1</td><td>Рабиев Илхомджон Бобочонович</td><td>Главный аудитор</td></tr><tr data-name="кучкоров икром ильхомжонович" data-position="специалист" data-nomination="тренер года"><td>2</td><td>Кучкоров Икром Ильхомжонович</td><td>Специалист</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+    <details class="winner-group" open data-group="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности">
+      <summary>
+        <div>
+          <h3>Список сотрудников, рекомендованных комиссией к поощрению в форме благодарности</h3>
+          <div class="group-note">Полный список победителей и рекомендованных сотрудников</div>
+        </div>
+        <div class="winner-meta">
+          <span class="count-badge">38 чел.</span>
+        </div>
+      </summary>
+      <div class="table-wrap">
+        <table class="winners-table">
+          <thead>
+            <tr><th>№</th><th>Сотрудник</th><th>Должность</th></tr>
+          </thead>
+          <tbody>
+            <tr data-name="шарипов одилходжа исмонович" data-position="супервайзер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>1</td><td>Шарипов Одилходжа Исмонович</td><td>Супервайзер</td></tr><tr data-name="дадобоев абдуазиз абдураззокович" data-position="супервайзер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>2</td><td>Дадобоев Абдуазиз Абдураззокович</td><td>Супервайзер</td></tr><tr data-name="хаётзода шукрулло забайдулло" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>3</td><td>Хаётзода Шукрулло Забайдулло</td><td>Складчик-продавец</td></tr><tr data-name="зокиров абдуазиз абдушукурович" data-position="менеджер по продажам" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>4</td><td>Зокиров Абдуазиз Абдушукурович</td><td>Менеджер по продажам</td></tr><tr data-name="мехробчон хакими каримзода" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>5</td><td>Мехробчон Хакими Каримзода</td><td>Складчик-продавец</td></tr><tr data-name="мирзоев абдурахмон абдуханонович" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>6</td><td>Мирзоев Абдурахмон Абдуханонович</td><td>Складчик-продавец</td></tr><tr data-name="бегижонов абдувохид мукимжонович" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>7</td><td>Бегижонов Абдувохид Мукимжонович</td><td>Складчик-продавец</td></tr><tr data-name="обидов бахтиёр обидчонович" data-position="менеджер по продажам" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>8</td><td>Обидов Бахтиёр Обидчонович</td><td>Менеджер по продажам</td></tr><tr data-name="рашидов бехруз абдукаримович" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>9</td><td>Рашидов Бехруз Абдукаримович</td><td>Складчик-продавец</td></tr><tr data-name="гафуров хайрулло убайдуллоевич" data-position="складчик-продавец" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>10</td><td>Гафуров Хайрулло Убайдуллоевич</td><td>Складчик-продавец</td></tr><tr data-name="исоматдинов сайдулло хабибуллоевич" data-position="руководитель" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>11</td><td>Исоматдинов Сайдулло Хабибуллоевич</td><td>Руководитель</td></tr><tr data-name="абдурахмонов кадридин доруевич" data-position="водитель экспедитор" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>12</td><td>Абдурахмонов Кадридин Доруевич</td><td>Водитель экспедитор</td></tr><tr data-name="бекназаров саидакрам саидакбарович" data-position="логист" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>13</td><td>Бекназаров Саидакрам Саидакбарович</td><td>Логист</td></tr><tr data-name="бобоев мехроч кандиевич" data-position="логист" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>14</td><td>Бобоев Мехроч Кандиевич</td><td>Логист</td></tr><tr data-name="гапори рустам абдуманонзода" data-position="грузчик" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>15</td><td>Гапори Рустам Абдуманонзода</td><td>Грузчик</td></tr><tr data-name="дадобоев обидчон уктамчонович" data-position="водитель экспедитор" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>16</td><td>Дадобоев Обидчон Уктамчонович</td><td>Водитель экспедитор</td></tr><tr data-name="зарипов шохрух хайруллоевич" data-position="логист" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>17</td><td>Зарипов Шохрух Хайруллоевич</td><td>Логист</td></tr><tr data-name="калонов абдурахмон мавлончонович" data-position="супервайзер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>18</td><td>Калонов Абдурахмон Мавлончонович</td><td>Супервайзер</td></tr><tr data-name="мирзоев амирчон" data-position="заведующий складом" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>19</td><td>Мирзоев Амирчон</td><td>Заведующий складом</td></tr><tr data-name="назаров хусайн фарходович" data-position="логист" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>20</td><td>Назаров Хусайн Фарходович</td><td>Логист</td></tr><tr data-name="рахимов бахтиёр хаидхонович" data-position="заведующий складом" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>21</td><td>Рахимов Бахтиёр Хаидхонович</td><td>Заведующий складом</td></tr><tr data-name="рахматзода човидони турсун" data-position="водитель экспедитор" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>22</td><td>Рахматзода Човидони Турсун</td><td>Водитель экспедитор</td></tr><tr data-name="салахов баходур шамсиевич" data-position="супервайзер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>23</td><td>Салахов Баходур Шамсиевич</td><td>Супервайзер</td></tr><tr data-name="сафаров шамсиддин муянсарович" data-position="экспедитор - грузчик" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>24</td><td>Сафаров Шамсиддин Муянсарович</td><td>Экспедитор - грузчик</td></tr><tr data-name="тойиров далер пирович" data-position="водитель" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>25</td><td>Тойиров Далер Пирович</td><td>Водитель</td></tr><tr data-name="хочаев рауфжон эгамович" data-position="экспедитор - грузчик" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>26</td><td>Хочаев Рауфжон Эгамович</td><td>Экспедитор - грузчик</td></tr><tr data-name="шарипов хайриддин насриддинович" data-position="заведующий складом" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>27</td><td>Шарипов Хайриддин Насриддинович</td><td>Заведующий складом</td></tr><tr data-name="сатторов джамшед хуршедович" data-position="бренд-менеджер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>28</td><td>Сатторов Джамшед Хуршедович</td><td>Бренд-менеджер</td></tr><tr data-name="кодиров камолчон насимчонович" data-position="hr bp" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>29</td><td>Кодиров Камолчон Насимчонович</td><td>HR BP</td></tr><tr data-name="ахмедбоев мубинчон мукимчонович" data-position="руководитель" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>30</td><td>Ахмедбоев Мубинчон Мукимчонович</td><td>Руководитель</td></tr><tr data-name="темуров мухаммадчон одилчонович" data-position="менеджер по продажам" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>31</td><td>Темуров Мухаммадчон Одилчонович</td><td>Менеджер по продажам</td></tr><tr data-name="махмудов иброхим ибодуллоевич" data-position="риск-менеджер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>32</td><td>Махмудов Иброхим Ибодуллоевич</td><td>Риск-менеджер</td></tr><tr data-name="абдурахмонов абдуразок хасанович" data-position="менеджер по продажам" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>33</td><td>Абдурахмонов Абдуразок Хасанович</td><td>Менеджер по продажам</td></tr><tr data-name="чураев шерали найимович" data-position="грузчик" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>34</td><td>Чураев Шерали Найимович</td><td>Грузчик</td></tr><tr data-name="гафуров неъматулло абдувалиевич" data-position="производственный бухгалтер" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>35</td><td>Гафуров Неъматулло Абдувалиевич</td><td>Производственный бухгалтер</td></tr><tr data-name="зоидов аъзамчон акрамович" data-position="координатор" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>36</td><td>Зоидов Аъзамчон Акрамович</td><td>Координатор</td></tr><tr data-name="негматов камолиддин усмончонович" data-position="администратор 1с" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>37</td><td>Негматов Камолиддин Усмончонович</td><td>Администратор 1С</td></tr><tr data-name="хамдамов мухаммад мулохакимович" data-position="юрист" data-nomination="список сотрудников, рекомендованных комиссией к поощрению в форме благодарности"><td>38</td><td>Хамдамов Мухаммад Мулохакимович</td><td>Юрист</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    
+
+          <div class="muted-chip">Источник списка: протокол «Итоги года – 2025»</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="apply" class="wrapper">
+      <div class="section-title">
+        <div class="kicker">
+
+    
+    <script>
+      const winnerSearch = document.getElementById('winnerSearch');
+      const winnerCategory = document.getElementById('winnerCategory');
+      const winnersSection = document.getElementById('winners');
+      const applicationModal = document.getElementById('applicationModal');
+      const applicationForm = document.getElementById('applicationForm');
+      const nominationInput = document.getElementById('nominationInput');
+      const modalTitle = document.getElementById('modalTitle');
+      const successMessage = document.getElementById('successMessage');
+
+      function filterWinners() {
+        const q = (winnerSearch?.value || '').toLowerCase().trim();
+        const cat = (winnerCategory?.value || '').toLowerCase().trim();
+        document.querySelectorAll('.winner-group').forEach(group => {
+          const groupName = (group.dataset.group || '').toLowerCase();
+          let visibleRows = 0;
+
+          group.querySelectorAll('tbody tr').forEach(row => {
+            const text = (row.dataset.name + ' ' + row.dataset.position + ' ' + row.dataset.nomination).toLowerCase();
+            const matchesSearch = !q || text.includes(q);
+            const matchesCat = !cat || groupName === cat;
+            const show = matchesSearch && matchesCat;
+            row.style.display = show ? '' : 'none';
+            if (show) visibleRows++;
+          });
+
+          group.style.display = visibleRows > 0 ? '' : 'none';
+        });
+      }
+
+      if (winnerSearch) winnerSearch.addEventListener('input', filterWinners);
+      if (winnerCategory) winnerCategory.addEventListener('change', filterWinners);
+
+      function toggleWinners(event) {
+        if (event) event.preventDefault();
+        if (!winnersSection) return;
+        const isHidden = winnersSection.classList.contains('winners-hidden');
+        if (isHidden) {
+          winnersSection.classList.remove('winners-hidden');
+        } else {
+          winnersSection.classList.add('winners-hidden');
+        }
+        winnersSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function openApplicationModal(nomination) {
+        if (!applicationModal) return;
+        applicationModal.classList.add('open');
+        applicationModal.setAttribute('aria-hidden', 'false');
+        nominationInput.value = nomination || '';
+        modalTitle.textContent = 'Подать заявку — ' + nomination;
+        successMessage.style.display = 'none';
+
+        const innovatorSection = document.getElementById('innovatorFields');
+        const leaderSection = document.getElementById('leaderFields');
+        const formDescription = document.getElementById('formDescription');
+        const formHint = document.getElementById('formHint');
+
+        if (innovatorSection) innovatorSection.style.display = nomination === 'Новатор года' ? 'block' : 'none';
+        if (leaderSection) leaderSection.style.display = nomination === 'Лучший руководитель' ? 'block' : 'none';
+
+        if (formDescription) {
+          if (nomination === 'Новатор года') {
+            formDescription.textContent = 'Заполните форму по реализованной инициативе, нововведению или проекту. Комиссии важно увидеть не только саму идею, но и подтверждённый эффект от внедрения.';
+          } else if (nomination === 'Лучший руководитель') {
+            formDescription.textContent = 'Заполните форму самовыдвижения по управленческим результатам, развитию команды и личному вкладу в эффективность подразделения.';
+          } else {
+            formDescription.textContent = 'Заполните форму для самовыдвижения.';
+          }
+        }
+
+        if (formHint) {
+          if (nomination === 'Новатор года') {
+            formHint.textContent = 'Для номинации «Новатор года» желательно подробно описать идею, эффект, подтверждающие материалы и достигнутые результаты.';
+          } else if (nomination === 'Лучший руководитель') {
+            formHint.textContent = 'Для номинации «Лучший руководитель» укажите управленческие результаты, вклад в развитие сотрудников и ключевые достижения команды.';
+          } else {
+            formHint.textContent = 'Доступно только для двух номинаций: Лучший руководитель и Новатор года.';
+          }
+        }
+
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeApplicationModal() {
+        if (!applicationModal) return;
+        applicationModal.classList.remove('open');
+        applicationModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      if (applicationModal) {
+        applicationModal.addEventListener('click', function(event) {
+          if (event.target === applicationModal) closeApplicationModal();
+        });
+      }
+
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeApplicationModal();
+      });
+
+      if (applicationForm) {
+        applicationForm.addEventListener('submit', function(event) {
+          event.preventDefault();
+          successMessage.style.display = 'block';
+          applicationForm.reset();
+        });
+      }
+    </script>
+
+
+
+    <section id="process" class="wrapper process">
+      <div class="white-panel">
+        <div class="process-grid">
+          <div class="steps">
+            <div class="kicker" style="color:#b91c1c;">Прозрачная модель</div>
+            <h2 style="margin:10px 0 0; color:#111827;">Как устроен процесс оценки</h2>
+
+            <div class="step"><div class="step-badge">1</div><div>Номинации и условия участия объявляются заранее для всех сотрудников.</div></div>
+            <div class="step"><div class="step-badge">2</div><div>По каждой номинации определяются критерии, источник данных и этапы рассмотрения.</div></div>
+            <div class="step"><div class="step-badge">3</div><div>Комиссия проводит оценку на основе KPI, форм, опросов 360, экспертных мнений и внутренних данных.</div></div>
+            <div class="step"><div class="step-badge">4</div><div>По итогам публично озвучивается причина выбора победителей.</div></div>
+          </div>
+
+          <div class="gradient-panel">
+            <h3>Что уже добавлено</h3>
+            <div class="gradient-item">Страница победителей 2025 года с полным списком</div>
+            <div class="gradient-item">Онлайн-форма подачи заявок</div>
+            <div class="gradient-item">Поиск и фильтр по номинациям</div>
+            <div class="gradient-item">Готовая структура для подключения отправки заявок</div>
+            <div class="gradient-item">Удобное раскрытие списков по каждой номинации</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <div class="modal" id="applicationModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" type="button" aria-label="Закрыть" onclick="closeApplicationModal()">×</button>
+      <div class="kicker" style="color:#b91c1c;">Самовыдвижение</div>
+      <h2 id="modalTitle" style="margin:10px 0 10px; color:#111827;">Подать заявку</h2>
+      <p id="formDescription" style="margin:0 0 20px; color:#475569; line-height:1.7;">
+        Заполните форму для самовыдвижения. Сейчас форма работает как готовое окно заявки на сайте. Позже сюда можно подключить Google Form, email или отправку в таблицу.
+      </p>
+
+      <form id="applicationForm">
+        <input type="hidden" id="nominationInput" name="nomination" />
+
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="fullName">1. Информация о сотруднике — ФИО</label>
+            <input id="fullName" name="fullName" type="text" placeholder="Введите ФИО" required />
+          </div>
+          <div class="form-field">
+            <label for="position">Должность</label>
+            <input id="position" name="position" type="text" placeholder="Введите должность" required />
+          </div>
+          <div class="form-field">
+            <label for="department">Подразделение / отдел</label>
+            <input id="department" name="department" type="text" placeholder="Введите подразделение / отдел" required />
+          </div>
+          <div class="form-field">
+            <label for="phone">Контактный номер</label>
+            <input id="phone" name="phone" type="tel" placeholder="+992 ..." required />
+          </div>
+        </div>
+
+        <div id="innovatorFields" style="display:none;">
+          <div class="form-field">
+            <label for="ideaTitle">2. Информация о реализованной инициативе — Название проекта / идеи</label>
+            <input id="ideaTitle" name="ideaTitle" type="text" placeholder="Например: Оптимизация маршрутов доставки" />
+          </div>
+          <div class="form-field">
+            <label for="ideaSummary">Краткое описание сути нововведения</label>
+            <textarea id="ideaSummary" name="ideaSummary" rows="4" placeholder="Что именно было внедрено, в чём заключалась идея"></textarea>
+          </div>
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="ideaWhenWhere">Когда и где была реализована идея</label>
+              <input id="ideaWhenWhere" name="ideaWhenWhere" type="text" placeholder="Например: январь 2026, склад №2" />
+            </div>
+            <div class="form-field">
+              <label for="ideaProblems">Какие задачи / проблемы решала инициатива</label>
+              <input id="ideaProblems" name="ideaProblems" type="text" placeholder="Кратко укажите главную проблему" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="ideaBenefit">Какие экономические выгоды были получены после реализации</label>
+            <textarea id="ideaBenefit" name="ideaBenefit" rows="4" placeholder="Укажите конкретные цифры, эффекты, улучшенные процессы и другие результаты"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ideaMaterials">3. Подтверждающие материалы</label>
+            <textarea id="ideaMaterials" name="ideaMaterials" rows="5" placeholder="Фото / скриншоты / документы; таблицы / расчёты / аналитика; отзывы коллег / руководства; другие доказательства"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="ideaConfirm">4. Подтверждение</label>
+            <textarea id="ideaConfirm" name="ideaConfirm" rows="3" placeholder="Подтверждаю, что представленная инициатива действительно была реализована мной, и указанная информация является достоверной."></textarea>
+          </div>
+        </div>
+
+        <div id="leaderFields" style="display:none;">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="leaderExperience">Стаж в роли руководителя</label>
+              <input id="leaderExperience" name="leaderExperience" type="text" placeholder="Например: 3 года" />
+            </div>
+            <div class="form-field">
+              <label for="leaderTeamSize">Количество подчинённых сотрудников</label>
+              <input id="leaderTeamSize" name="leaderTeamSize" type="text" placeholder="Например: 24 сотрудника" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="leaderResults">Ключевые результаты команды</label>
+            <textarea id="leaderResults" name="leaderResults" rows="4" placeholder="Опишите результаты подразделения, KPI, улучшения и вклад команды"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="leaderDevelopment">Вклад в развитие сотрудников</label>
+            <textarea id="leaderDevelopment" name="leaderDevelopment" rows="4" placeholder="Опишите, как вы развивали подчинённых, наставничество, обучение, удержание и вовлечённость"></textarea>
+          </div>
+          <div class="form-field">
+            <label for="leaderReason">Почему вы достойны номинации «Лучший руководитель»</label>
+            <textarea id="leaderReason" name="leaderReason" rows="5" placeholder="Кратко опишите управленческий стиль, влияние на команду и достигнутые результаты"></textarea>
+          </div>
+        </div>
+
+        <div class="form-note" id="formHint">
+          Доступно только для двух номинаций: <strong>Лучший руководитель</strong> и <strong>Новатор года</strong>.
+        </div>
+        <div class="submit-row">
+          <button class="apply-btn" type="submit">Отправить заявку</button>
+          <span style="color:#64748b; font-size:13px;">Это демонстрационная версия формы на сайте.</span>
+        </div>
+        <div class="success-msg" id="successMessage">Форма обновлена. Теперь для номинации «Новатор года» добавлен отдельный расширенный сценарий самовыдвижения.</div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrapper">Farovon Awards © 2026 • Корпоративная премия признания лучших сотрудников компании.</div>
+  </footer>
+
+<script>
+const slides = document.querySelectorAll('.hero-slider img');
+let index = 0;
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}, 3000);
+</script>
+
+</body>
+</html>
