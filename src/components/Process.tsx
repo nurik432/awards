@@ -1,37 +1,50 @@
-export default function Process() {
+interface ProcessProps {
+  content: Record<string, string>;
+}
+
+export default function Process({ content }: ProcessProps) {
+  const sc = content;
+
+  const steps = [
+    sc['process_step_1'] || 'Номинации и условия участия объявляются заранее для всех сотрудников.',
+    sc['process_step_2'] || 'По каждой номинации определяются критерии, источник данных и этапы рассмотрения.',
+    sc['process_step_3'] || 'Комиссия проводит оценку на основе KPI, форм, опросов 360, экспертных мнений и внутренних данных.',
+    sc['process_step_4'] || 'По итогам публично озвучивается причина выбора победителей.',
+  ].filter(Boolean);
+
+  const features = [
+    sc['process_feature_1'] || 'Страница победителей 2025 года с полным списком',
+    sc['process_feature_2'] || 'Онлайн-форма подачи заявок',
+    sc['process_feature_3'] || 'Поиск и фильтр по номинациям',
+    sc['process_feature_4'] || 'Готовая структура для подключения отправки заявок',
+    sc['process_feature_5'] || 'Удобное раскрытие списков по каждой номинации',
+  ].filter(Boolean);
+
   return (
     <section id="process" className="wrapper process">
       <div className="white-panel">
         <div className="process-grid">
           <div className="steps">
-            <div className="kicker" style={{ color: '#b91c1c' }}>Прозрачная модель</div>
-            <h2 style={{ margin: '10px 0 0', color: '#111827' }}>Как устроен процесс оценки</h2>
+            <div className="kicker" style={{ color: '#b91c1c' }}>
+              {sc['process_kicker'] || 'Прозрачная модель'}
+            </div>
+            <h2 style={{ margin: '10px 0 0', color: '#111827' }}>
+              {sc['process_title'] || 'Как устроен процесс оценки'}
+            </h2>
 
-            <div className="step">
-              <div className="step-badge">1</div>
-              <div>Номинации и условия участия объявляются заранее для всех сотрудников.</div>
-            </div>
-            <div className="step">
-              <div className="step-badge">2</div>
-              <div>По каждой номинации определяются критерии, источник данных и этапы рассмотрения.</div>
-            </div>
-            <div className="step">
-              <div className="step-badge">3</div>
-              <div>Комиссия проводит оценку на основе KPI, форм, опросов 360, экспертных мнений и внутренних данных.</div>
-            </div>
-            <div className="step">
-              <div className="step-badge">4</div>
-              <div>По итогам публично озвучивается причина выбора победителей.</div>
-            </div>
+            {steps.map((text, i) => (
+              <div className="step" key={i}>
+                <div className="step-badge">{i + 1}</div>
+                <div>{text}</div>
+              </div>
+            ))}
           </div>
 
           <div className="gradient-panel">
-            <h3>Что уже добавлено</h3>
-            <div className="gradient-item">Страница победителей 2025 года с полным списком</div>
-            <div className="gradient-item">Онлайн-форма подачи заявок</div>
-            <div className="gradient-item">Поиск и фильтр по номинациям</div>
-            <div className="gradient-item">Готовая структура для подключения отправки заявок</div>
-            <div className="gradient-item">Удобное раскрытие списков по каждой номинации</div>
+            <h3>{sc['process_panel_title'] || 'Что уже добавлено'}</h3>
+            {features.map((text, i) => (
+              <div className="gradient-item" key={i}>{text}</div>
+            ))}
           </div>
         </div>
       </div>

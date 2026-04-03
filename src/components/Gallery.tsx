@@ -5,14 +5,16 @@ interface GalleryItem {
 
 interface GalleryProps {
   items: GalleryItem[];
+  kicker?: string;
+  title?: string;
 }
 
-export default function Gallery({ items }: GalleryProps) {
+export default function Gallery({ items, kicker, title }: GalleryProps) {
   return (
     <section id="gallery" className="wrapper">
       <div className="section-title">
-        <div className="kicker">Галерея</div>
-        <h2>Фото с прошлых мероприятий «Итоги года»</h2>
+        <div className="kicker">{kicker || 'Галерея'}</div>
+        <h2>{title || 'Фото с прошлых мероприятий «Итоги года»'}</h2>
       </div>
       {items.length === 0 ? (
         <div className="white-panel" style={{ textAlign: 'center', padding: '60px', color: '#7f1d1d' }}>

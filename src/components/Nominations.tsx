@@ -71,14 +71,16 @@ function NominationCard({ nom }: { nom: NominationProp }) {
 
 interface NominationsProps {
   nominations: NominationProp[];
+  kicker?: string;
+  title?: string;
 }
 
-export default function Nominations({ nominations }: NominationsProps) {
+export default function Nominations({ nominations, kicker, title }: NominationsProps) {
   return (
     <section id="nominations" className="wrapper">
       <div className="section-title">
-        <div className="kicker">Номинации</div>
-        <h2>Основные категории премии</h2>
+        <div className="kicker">{kicker || 'Номинации'}</div>
+        <h2>{title || 'Основные категории премии'}</h2>
       </div>
       {nominations.length === 0 ? (
         <div className="white-panel" style={{ textAlign: 'center', padding: '60px', color: '#7f1d1d' }}>

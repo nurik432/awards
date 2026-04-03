@@ -4,6 +4,7 @@ import InfoPanel from '@/components/InfoPanel';
 import Nominations from '@/components/Nominations';
 import Gallery from '@/components/Gallery';
 import WinnersArchive from '@/components/WinnersArchive';
+import Process from '@/components/Process';
 import Footer from '@/components/Footer';
 
 export const dynamic = 'force-dynamic';
@@ -30,8 +31,10 @@ export default async function Home() {
     prisma.siteContent.findMany(),
   ]);
 
-  // Build info cards from SiteContent
+  // Build content map
   const sc = Object.fromEntries(siteContent.map((s) => [s.key, s.value]));
+
+  // Build info cards from SiteContent
   const infoCards = [
     { title: sc['info_1_title'] || 'Кто участвует', text: sc['info_1_text'] || '' },
     { title: sc['info_2_title'] || 'Кто определяет победителей', text: sc['info_2_text'] || '' },
@@ -65,14 +68,40 @@ export default async function Home() {
 
   return (
     <>
-      <Hero slides={slideUrls} />
+      <Hero
+        slides={slideUrls}
+        badge={sc['hero_badge']}
+        title={sc['hero_title']}
+        description={sc['hero_description']}
+        photoBadge={sc['hero_photo_badge']}
+        btnNominations={sc['hero_btn_nominations']}
+        btnGallery={sc['hero_btn_gallery']}
+        btnWinners={sc['hero_btn_winners']}
+      />
       <main>
         <InfoPanel cards={infoCards} />
-        <Nominations nominations={nomProps} />
-        <Gallery items={galleryProps} />
-        <WinnersArchive groups={winnerGroups} />
+        <Nominations
+          nominations={nomProps}
+          kicker={sc['nom_kicker']}
+          title={sc['nom_title']}
+        />
+        <Gallery
+          items={galleryProps}
+          kicker={sc['gallery_kicker']}
+          title={sc['gallery_title']}
+        />
+        <WinnersArchive
+          groups={winnerGroups}
+          kicker={sc['winners_kicker']}
+          title={sc['winners_title']}
+          btnToggle={sc['winners_btn_toggle']}
+        />
+        <Process content={sc} />
       </main>
-      <Footer />
+      <Footer
+        leftText={sc['footer_left']}
+        rightText={sc['footer_right']}
+      />
     </>
   );
 }

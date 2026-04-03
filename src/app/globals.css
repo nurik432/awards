@@ -479,3 +479,17 @@ footer .wrapper {
   .form-grid, .gallery-grid { grid-template-columns: 1fr; }
   .hero-photo { min-height: 320px; }
 }
+
+/* ─── Admin Content – Collapsible Sections ──── */
+.admin-layout details.white-panel { padding: 0; overflow: hidden; }
+.admin-layout details.white-panel summary { list-style: none; }
+.admin-layout details.white-panel summary::-webkit-details-marker { display: none; }
+.admin-layout details.white-panel[open] summary span:last-child {
+  transform: rotate(180deg);
+}
+.admin-layout details.white-panel input:focus,
+.admin-layout details.white-panel textarea:focus {
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+  outline: none;
+}

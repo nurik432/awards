@@ -9,9 +9,12 @@ export interface WinnerGroup {
 
 interface WinnersArchiveProps {
   groups: WinnerGroup[];
+  kicker?: string;
+  title?: string;
+  btnToggle?: string;
 }
 
-export default function WinnersArchive({ groups }: WinnersArchiveProps) {
+export default function WinnersArchive({ groups, kicker, title, btnToggle }: WinnersArchiveProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -56,15 +59,15 @@ export default function WinnersArchive({ groups }: WinnersArchiveProps) {
             }
           }}
         >
-          Показать / скрыть победителей прошлых лет
+          {btnToggle || 'Показать / скрыть победителей прошлых лет'}
         </button>
       </section>
 
       {/* Winners section */}
       <section id="winners" className="wrapper" style={{ display: isVisible ? 'block' : 'none' }}>
         <div className="section-title">
-          <div className="kicker">Архив победителей</div>
-          <h2>Победители и рекомендованные сотрудники по итогам 2025 года</h2>
+          <div className="kicker">{kicker || 'Архив победителей'}</div>
+          <h2>{title || 'Победители и рекомендованные сотрудники по итогам 2025 года'}</h2>
         </div>
 
         <div className="archive-panel">
