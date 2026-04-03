@@ -40,6 +40,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               <a href="/admin/content" className="btn btn-secondary" style={{ padding: '8px 14px', fontSize: '13px', color: '#7f1d1d', borderColor: '#fecaca' }}>
                 ✏️ Контент
               </a>
+              <a href="/admin/sync" className="btn btn-secondary" style={{ padding: '8px 14px', fontSize: '13px', color: '#7f1d1d', borderColor: '#fecaca' }}>
+                🔄 Google Sheets
+              </a>
             </nav>
           </div>
           <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
