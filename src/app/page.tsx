@@ -4,7 +4,6 @@ import InfoPanel from '@/components/InfoPanel';
 import Nominations from '@/components/Nominations';
 import Gallery from '@/components/Gallery';
 import WinnersArchive from '@/components/WinnersArchive';
-import Process from '@/components/Process';
 import Footer from '@/components/Footer';
 
 export const dynamic = 'force-dynamic';
@@ -96,7 +95,6 @@ export default async function Home() {
           title={sc['winners_title']}
           btnToggle={sc['winners_btn_toggle']}
         />
-        <Process content={sc} />
       </main>
       <Footer
         leftText={sc['footer_left']}
