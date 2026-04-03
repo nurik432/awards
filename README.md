@@ -1,36 +1,293 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏆 Farovon Awards
 
-## Getting Started
+**Farovon Awards** — корпоративный веб-портал для проведения ежегодной премии признания лучших сотрудников компании **Farovon Group**. Платформа объединяет публичную витрину с номинациями, систему подачи заявок, архив победителей и полнофункциональную административную панель для управления всем контентом.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📋 Содержание
+
+- [Возможности](#-возможности)
+- [Технологический стек](#-технологический-стек)
+- [Архитектура проекта](#-архитектура-проекта)
+- [Быстрый старт](#-быстрый-старт)
+- [Переменные окружения](#-переменные-окружения)
+- [База данных](#-база-данных)
+- [Деплой](#-деплой)
+- [Скриншоты](#-скриншоты)
+
+---
+
+## ✨ Возможности
+
+### Публичная часть (для сотрудников)
+
+| Возможность | Описание |
+|---|---|
+| **Hero-слайдер** | Автоматическая смена баннеров церемонии с плавной анимацией (интервал 4 сек) |
+| **Информационные панели** | Блоки «Кто участвует», «Кто определяет победителей», «Главный принцип» — редактируемые из админки |
+| **Каталог номинаций** | Карточки с иконками, описанием, критериями отбора, этапами и тегами участия |
+| **Подача заявок** | Встроенная форма с полями: ФИО, подразделение, должность, телефон, email, обоснование. Поддержка 3 типов форм: `basic`, `innovator`, `manager` |
+| **Интеграция с Google Forms** | Для отдельных номинаций — переход на внешнюю Google Form |
+| **Фотогалерея** | Сетка фотографий прошедших церемоний с hover-эффектами и подписями |
+| **Архив победителей** | Расширяемый список лауреатов по номинациям с поиском по ФИО/должности и фильтром по категории |
+| **Адаптивный дизайн** | Полная адаптация от десктопа до мобильных устройств (breakpoints: 1050px, 980px, 900px, 760px, 720px) |
+
+### Административная панель (`/admin`)
+
+| Модуль | Возможности |
+|---|---|
+| **📋 Заявки** | Просмотр всех поступивших заявок, одобрение / отклонение / удаление, счётчик заявок |
+| **🏆 Номинации** | Создание номинаций (slug, иконка, описание, критерии, этапы, теги, тип формы, Google Form URL), активация/деактивация, удаление |
+| **🥇 Победители** | Добавление победителей с привязкой к номинации и году, загрузка фото, удаление |
+| **📸 Галерея** | Загрузка изображений (JPG/PNG/WebP, до 2 МБ), управление видимостью, сортировка, удаление |
+| **✏️ Контент** | Редактирование текстовых блоков главной страницы без изменения кода (key-value store) |
+| **🔐 Аутентификация** | Вход по логину/паролю, JWT-сессии, middleware-защита всех `/admin/*` маршрутов |
+
+---
+
+## 🛠 Технологический стек
+
+### Фреймворк и рантайм
+
+| Технология | Версия | Назначение |
+|---|---|---|
+| [Next.js](https://nextjs.org/) | 16.2.2 | Full-stack React-фреймворк (App Router, Server Components, Server Actions, Route Handlers) |
+| [React](https://react.dev/) | 19.2.4 | UI-библиотека |
+| [TypeScript](https://www.typescriptlang.org/) | 5.x | Статическая типизация |
+
+### База данных и ORM
+
+| Технология | Назначение |
+|---|---|
+| [Prisma](https://www.prisma.io/) 5.22 | ORM для работы с БД: схема, миграции, генерация типов, seed-скрипты |
+| [PostgreSQL](https://www.postgresql.org/) | Реляционная СУБД |
+| [Supabase](https://supabase.com/) | Облачный хостинг PostgreSQL (production) |
+
+### Аутентификация
+
+| Технология | Назначение |
+|---|---|
+| [NextAuth.js v5](https://authjs.dev/) (Auth.js) | Аутентификация с Credentials Provider, JWT-стратегия, защита маршрутов через middleware |
+
+### UI и стилизация
+
+| Технология | Назначение |
+|---|---|
+| Vanilla CSS | Полностью кастомная дизайн-система: glassmorphism, градиенты, анимации, адаптивная сетка |
+| [Lucide React](https://lucide.dev/) | Набор SVG-иконок |
+
+### Утилиты
+
+| Технология | Назначение |
+|---|---|
+| [bcrypt](https://www.npmjs.com/package/bcrypt) | Хеширование паролей |
+| [Nodemailer](https://nodemailer.com/) | Почтовые уведомления (подготовлено для подключения SMTP) |
+| [ESLint](https://eslint.org/) | Линтинг кода |
+
+---
+
+## 🏗 Архитектура проекта
+
+```
+awards/
+├── prisma/
+│   ├── schema.prisma          # Схема БД: 7 моделей (Nomination, Application, Winner, Gallery, HeroSlide, SiteContent, User)
+│   └── seed.ts                # Начальные данные: 9 номинаций, 50+ победителей, галерея, слайды, контент
+│
+├── public/
+│   └── images/                # Статические изображения (логотип, фоны, фото)
+│
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx         # Корневой layout (мета-теги, lang="ru")
+│   │   ├── page.tsx           # Главная страница (SSR, загрузка всех данных из Prisma)
+│   │   ├── globals.css        # Глобальная дизайн-система (~480 строк)
+│   │   │
+│   │   ├── apply/
+│   │   │   └── page.tsx       # Страница подачи заявки
+│   │   │
+│   │   ├── api/
+│   │   │   ├── apply/         # POST /api/apply — сохранение заявки в БД
+│   │   │   ├── auth/          # NextAuth route handlers
+│   │   │   └── upload/        # POST /api/upload — загрузка изображений (Base64)
+│   │   │
+│   │   └── admin/
+│   │       ├── layout.tsx     # Admin layout с навигацией и сессией
+│   │       ├── page.tsx       # Дашборд заявок
+│   │       ├── actions.ts     # Server Actions: CRUD для всех сущностей
+│   │       ├── login/         # Страница входа
+│   │       ├── nominations/   # Управление номинациями
+│   │       ├── winners/       # Управление победителями
+│   │       ├── gallery/       # Управление галереей
+│   │       └── content/       # Управление текстовым контентом
+│   │
+│   ├── components/
+│   │   ├── Hero.tsx                  # Hero-секция с слайдером
+│   │   ├── Topbar.tsx                # Навигационная панель + HeroSlider
+│   │   ├── InfoPanel.tsx             # Информационные карточки
+│   │   ├── Nominations.tsx           # Сетка карточек номинаций
+│   │   ├── Gallery.tsx               # Фотогалерея
+│   │   ├── WinnersArchive.tsx        # Архив победителей (поиск, фильтры, таблицы)
+│   │   ├── Process.tsx               # Секция «Этапы отбора»
+│   │   ├── Footer.tsx                # Подвал сайта
+│   │   ├── ApplyForm.tsx             # Клиентская форма подачи заявки
+│   │   ├── ClientHome.tsx            # Клиентская обёртка главной страницы
+│   │   ├── AdminApplicationRow.tsx   # Строка заявки в админке
+│   │   ├── DeleteButton.tsx          # Кнопка удаления с подтверждением
+│   │   ├── NominationToggle.tsx      # Переключатель активности номинации
+│   │   ├── GalleryUploadForm.tsx     # Форма загрузки изображений в галерею
+│   │   └── GalleryVisibilityToggle.tsx # Управление видимостью фото
+│   │
+│   ├── lib/
+│   │   ├── prisma.ts          # Singleton Prisma Client
+│   │   └── email.ts           # Email-сервис (mock в dev, готов к SMTP)
+│   │
+│   ├── auth.ts                # Конфигурация NextAuth (Credentials, JWT, custom pages)
+│   └── middleware.ts           # Защита /admin/* маршрутов (редиректы авторизации)
+│
+├── package.json
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Быстрый старт
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Предварительные требования
 
-## Learn More
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+- Доступ к PostgreSQL (локально или через Supabase)
 
-To learn more about Next.js, take a look at the following resources:
+### Установка
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# 1. Клонировать репозиторий
+git clone https://github.com/nurik432/awards.git
+cd awards
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 2. Установить зависимости
+npm install
 
-## Deploy on Vercel
+# 3. Настроить переменные окружения
+cp .env.example .env
+# Отредактируйте .env (см. раздел ниже)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# 4. Инициализировать базу данных
+npx prisma generate        # Генерация Prisma Client
+npx prisma db push          # Применение схемы к БД
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# 5. (Опционально) Заполнить начальными данными
+npx tsx prisma/seed.ts
+
+# 6. Запустить dev-сервер
+npm run dev
+```
+
+Приложение будет доступно на `http://localhost:3000`.
+
+> **Быстрая инициализация БД** (одной командой):
+> ```bash
+> npm run db:init
+> ```
+
+---
+
+## 🔐 Переменные окружения
+
+Создайте файл `.env` в корне проекта:
+
+```env
+# ── База данных (Supabase / PostgreSQL) ──────────
+DATABASE_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres?pgbouncer=true"
+DIRECT_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
+
+# ── Аутентификация ───────────────────────────────
+AUTH_SECRET="сгенерируйте-случайную-строку-32-символа"
+ADMIN_USERNAME="admin"
+ADMIN_PASSWORD="ваш-надёжный-пароль"
+
+# ── Приложение ───────────────────────────────────
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
+> 💡 `AUTH_SECRET` можно сгенерировать командой: `openssl rand -base64 32`
+
+---
+
+## 🗄 База данных
+
+### Модели Prisma
+
+| Модель | Описание | Ключевые поля |
+|---|---|---|
+| `Nomination` | Номинации премии | slug, title, icon, criteria (JSON), steps (JSON), tags (JSON), formType, googleFormUrl |
+| `Application` | Заявки от сотрудников | employeeData (JSON), formData (JSON), status (PENDING/REVIEW/APPROVED/REJECTED) |
+| `Winner` | Лауреаты премии | name, department, position, nominationId, year, photo |
+| `Gallery` | Фотографии мероприятий | url, alt, album, orderIndex, isVisible |
+| `HeroSlide` | Слайды главного баннера | imageUrl, orderIndex, isActive |
+| `SiteContent` | Key-value хранилище текстов | key (PK), value |
+| `User` | Пользователи системы | email, password, role (EMPLOYEE/ADMIN/JUDGE) |
+
+### Seed-данные
+
+Скрипт `prisma/seed.ts` заполняет базу:
+- **9 номинаций**: Новатор года, Лучшие по продажам, Лучший руководитель, Наставник года, Ветераны труда, Лучший сотрудник года, Команда года, Амбассадор ценностей, Лучший тренер года
+- **50+ победителей** из протокола «Итоги года — 2025»
+- **14 фотографий** для галереи
+- **3 слайда** для Hero-секции
+- **6 текстовых блоков** для информационных карточек
+
+---
+
+## 🌐 Деплой
+
+### Vercel (рекомендуется)
+
+1. **Импорт репозитория**: Перейдите на [vercel.com/new](https://vercel.com/new) и подключите GitHub-репозиторий.
+
+2. **Переменные окружения**: Добавьте все переменные из `.env` в раздел **Settings → Environment Variables**.
+
+3. **Сборка и деплой**: Vercel автоматически определит Next.js и выполнит:
+   ```
+   npm run build  →  next build
+   ```
+   Скрипт `postinstall` автоматически выполнит `prisma generate`.
+
+4. **Инициализация БД** (при первом деплое):
+   ```bash
+   npx prisma db push
+   npx tsx prisma/seed.ts
+   ```
+
+### Supabase (база данных)
+
+1. Создайте проект на [supabase.com](https://supabase.com/).
+2. Перейдите в **Settings → Database** и скопируйте:
+   - **Connection string (Transaction)** → `DATABASE_URL`
+   - **Connection string (Session)** → `DIRECT_URL`
+3. При использовании pgbouncer добавьте `?pgbouncer=true` к `DATABASE_URL`.
+
+### Самостоятельный хостинг
+
+```bash
+# Сборка production-бандла
+npm run build
+
+# Запуск production-сервера
+npm run start
+```
+
+По умолчанию сервер запускается на порту `3000`. Используйте reverse proxy (Nginx / Caddy) для HTTPS.
+
+---
+
+## 📸 Скриншоты
+
+> Скриншоты будут добавлены после финального оформления дизайна.
+
+---
+
+## 📄 Лицензия
+
+Проект является внутренней собственностью **Farovon Group**. Все права защищены.
