@@ -22,15 +22,9 @@ export default function DeleteButton({ id, action }: DeleteButtonProps) {
 
   return (
     <button
-<<<<<<< HEAD
       type="button"
       onClick={handleDelete}
       className="adm-btn adm-btn-sm adm-btn-danger"
-=======
-      onClick={handleDelete}
-      className="btn btn-secondary"
-      style={{ padding: '6px 12px', fontSize: '11px', color: '#ef4444', borderColor: '#ef4444' }}
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
     >
       Удалить
     </button>

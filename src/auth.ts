@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-<<<<<<< HEAD
 import bcryptjs from "bcryptjs";
 import { timingSafeEqual } from "crypto";
 import { prisma } from "@/lib/prisma";
@@ -56,14 +55,11 @@ function noteFail(key: string): void {
 }
 
 const ROLES = new Set(["ADMIN", "JUDGE", "EMPLOYEE"]);
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-<<<<<<< HEAD
         username: { label: "Email или логин" },
         password: { label: "Пароль", type: "password" },
       },
@@ -157,27 +153,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     maxAge: 60 * 60 * 8, // 8 hours instead of the 30-day default
   },
   secret: AUTH_SECRET,
-=======
-        username: { label: "Username" },
-        password: { label: "Password", type: "password" },
-      },
-      authorize: async (credentials) => {
-        if (
-          credentials.username === process.env.ADMIN_USERNAME &&
-          credentials.password === process.env.ADMIN_PASSWORD
-        ) {
-          return { id: "1", name: "Admin", email: "admin@farovon.com" };
-        }
-        return null;
-      },
-    }),
-  ],
-  pages: {
-    signIn: "/admin/login",
-  },
-  session: {
-    strategy: "jwt",
-  },
-  secret: process.env.AUTH_SECRET,
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 });

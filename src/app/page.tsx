@@ -43,10 +43,7 @@ export default async function Home() {
   // Transform nominations for the component
   const nomProps = nominations.map((n) => ({
     id: n.id,
-<<<<<<< HEAD
     slug: n.slug,
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
     icon: n.icon || '🏆',
     title: n.title,
     description: n.description,
@@ -55,10 +52,7 @@ export default async function Home() {
     steps: safeJsonParse(n.steps),
     googleFormUrl: n.googleFormUrl,
     formType: n.formType,
-<<<<<<< HEAD
     acceptsApplications: n.acceptsApplications,
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   }));
 
   // Group winners by nomination for the archive component

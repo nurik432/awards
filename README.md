@@ -197,23 +197,7 @@ npm run dev
 
 Создайте файл `.env` в корне проекта:
 
-<<<<<<< HEAD
 См. `.env.example` — там же указаны переменные для Supabase Storage (`SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_UPLOADS_BUCKET`), которые обязательны: загруженные фото и презентации хранятся в Supabase Storage, а не на диске (на Vercel файловая система эфемерна).
-=======
-```env
-# ── База данных (Supabase / PostgreSQL) ──────────
-DATABASE_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres?pgbouncer=true"
-DIRECT_URL="postgresql://postgres:[PASSWORD]@db.[PROJECT-REF].supabase.co:5432/postgres"
-
-# ── Аутентификация ───────────────────────────────
-AUTH_SECRET="сгенерируйте-случайную-строку-32-символа"
-ADMIN_USERNAME="admin"
-ADMIN_PASSWORD="ваш-надёжный-пароль"
-
-# ── Приложение ───────────────────────────────────
-NEXT_PUBLIC_APP_URL="http://localhost:3000"
-```
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
 > 💡 `AUTH_SECRET` можно сгенерировать командой: `openssl rand -base64 32`
 

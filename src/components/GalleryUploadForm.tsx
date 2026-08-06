@@ -64,49 +64,26 @@ export default function GalleryUploadForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-<<<<<<< HEAD
       <div className="adm-field">
         <label className="adm-label">Фото (JPG, PNG, WebP, до 5 МБ) *</label>
-=======
-      <div className="form-field">
-        <label>Фото (JPG, PNG, WebP, до 5 МБ) *</label>
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
         <input
           type="file"
           name="fileInput"
           accept="image/jpeg,image/png,image/webp"
           required
           onChange={handleFileChange}
-<<<<<<< HEAD
           className="adm-input"
           style={{ borderStyle: 'dashed', cursor: 'pointer' }}
-=======
-          style={{
-            padding: '12px',
-            border: '2px dashed #fecaca',
-            borderRadius: '16px',
-            cursor: 'pointer',
-            width: '100%',
-          }}
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
         />
       </div>
 
       {preview && (
-<<<<<<< HEAD
         <div style={{ marginBottom: 14 }}>
-=======
-        <div style={{ marginBottom: '14px' }}>
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={preview}
             alt="Preview"
-<<<<<<< HEAD
             style={{ width: '100%', borderRadius: 8, maxHeight: 200, objectFit: 'cover', display: 'block' }}
-=======
-            style={{ width: '100%', borderRadius: '12px', maxHeight: '200px', objectFit: 'cover' }}
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
           />
         </div>
       )}
@@ -114,7 +91,6 @@ export default function GalleryUploadForm() {
       {/* Hidden URL field — will be set programmatically after upload */}
       <input type="hidden" name="url" />
 
-<<<<<<< HEAD
       <div className="adm-field">
         <label className="adm-label">Описание</label>
         <input type="text" name="alt" className="adm-input" placeholder="Farovon Awards • кадр" />
@@ -132,28 +108,11 @@ export default function GalleryUploadForm() {
 
       {error && (
         <div className="adm-note" style={{ marginBottom: 12 }}>
-=======
-      <div className="form-field">
-        <label>Описание</label>
-        <input type="text" name="alt" placeholder="Farovon Awards • кадр" />
-      </div>
-      <div className="form-field">
-        <label>Альбом</label>
-        <input type="text" name="album" placeholder="Итоги года 2025" defaultValue="Итоги года 2025" />
-      </div>
-
-      {error && (
-        <div className="form-note" style={{ color: 'red', borderColor: 'red', marginBottom: '10px' }}>
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
           {error}
         </div>
       )}
 
-<<<<<<< HEAD
       <button type="submit" className="adm-btn adm-btn-primary adm-btn-block" disabled={uploading}>
-=======
-      <button type="submit" className="apply-btn" style={{ width: '100%' }} disabled={uploading}>
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
         {uploading ? 'Загрузка...' : 'Загрузить фото'}
       </button>
     </form>

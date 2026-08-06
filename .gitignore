@@ -22,7 +22,6 @@
 
 # misc
 .DS_Store
-<<<<<<< HEAD
 
 # secrets and private keys — never commit
 *.pem
@@ -33,9 +32,6 @@
 id_rsa*
 id_ed25519*
 *.docx
-=======
-*.pem
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
 # debug
 npm-debug.log*
@@ -49,7 +45,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-<<<<<<< HEAD
 # database (local dev only — production is Supabase Postgres)
 *.db
 *.db-journal
@@ -60,8 +55,6 @@ yarn-error.log*
 # large reference file, not used by the app
 farovon_awards_slider.html
 
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 # typescript
 *.tsbuildinfo
 next-env.d.ts

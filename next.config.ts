@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
 
-<<<<<<< HEAD
 // script-src / style-src are intentionally absent: Next.js injects inline
 // hydration scripts, and a strict policy without a nonce pipeline breaks the
 // app. Everything else is locked to same-origin, which is what limits the
@@ -47,10 +46,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-=======
-const nextConfig: NextConfig = {
-  /* config options here */
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 };
 
 export default nextConfig;

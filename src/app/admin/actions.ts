@@ -2,7 +2,6 @@
 
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
-<<<<<<< HEAD
 import bcryptjs from 'bcryptjs';
 import { auth } from '@/auth';
 import { getStorageClient, UPLOADS_BUCKET } from '@/lib/storage';
@@ -36,11 +35,6 @@ async function removeUpload(url: string | null | undefined): Promise<void> {
 // ── Applications ──────────────────────────────────────────
 export async function updateApplicationStatus(id: string, status: string, reviewNote: string = ''): Promise<void> {
   await requireAdmin();
-=======
-
-// ── Applications ──────────────────────────────────────────
-export async function updateApplicationStatus(id: string, status: string, reviewNote: string = ''): Promise<void> {
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.application.update({
     where: { id },
     data: { status, reviewNote },
@@ -49,7 +43,6 @@ export async function updateApplicationStatus(id: string, status: string, review
 }
 
 export async function deleteApplication(id: string): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
   // Read the attachments first so deleting the row also frees the disk.
   const app = await prisma.application.findUnique({
@@ -59,18 +52,12 @@ export async function deleteApplication(id: string): Promise<void> {
   await prisma.application.delete({ where: { id } });
   await removeUpload(app?.photoUrl);
   await removeUpload(app?.presentationUrl);
-=======
-  await prisma.application.delete({ where: { id } });
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   revalidatePath('/admin');
 }
 
 // ── Nominations ───────────────────────────────────────────
 export async function toggleNomination(id: string, isActive: boolean): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.nomination.update({
     where: { id },
     data: { isActive },
@@ -80,10 +67,7 @@ export async function toggleNomination(id: string, isActive: boolean): Promise<v
 }
 
 export async function createNomination(formData: FormData): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   const title = formData.get('title') as string;
   const slug = (formData.get('slug') as string) || title.toLowerCase().replace(/\s+/g, '-');
   const icon = (formData.get('icon') as string) || '🏆';
@@ -93,22 +77,10 @@ export async function createNomination(formData: FormData): Promise<void> {
   const tagsRaw = formData.get('tags') as string;
   const googleFormUrl = (formData.get('googleFormUrl') as string) || null;
   const formType = (formData.get('formType') as string) || 'basic';
-<<<<<<< HEAD
   const acceptsApplications = formData.get('acceptsApplications') === 'on';
 
   const toJsonArray = (text: string) =>
     JSON.stringify(text.split('\n').map((s) => s.trim()).filter(Boolean));
-=======
-
-  // Parse newline-separated text into JSON arrays
-  const toJsonArray = (text: string) =>
-    JSON.stringify(
-      text
-        .split('\n')
-        .map((s) => s.trim())
-        .filter(Boolean)
-    );
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
   await prisma.nomination.create({
     data: {
@@ -121,7 +93,6 @@ export async function createNomination(formData: FormData): Promise<void> {
       tags: toJsonArray(tagsRaw || ''),
       googleFormUrl,
       formType,
-<<<<<<< HEAD
       acceptsApplications,
     },
   });
@@ -159,8 +130,6 @@ export async function updateNomination(formData: FormData): Promise<void> {
       googleFormUrl: googleFormUrl || null,
       formType,
       acceptsApplications,
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
     },
   });
   revalidatePath('/admin/nominations');
@@ -168,10 +137,7 @@ export async function updateNomination(formData: FormData): Promise<void> {
 }
 
 export async function deleteNomination(id: string): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.nomination.delete({ where: { id } });
   revalidatePath('/admin/nominations');
   revalidatePath('/');
@@ -179,10 +145,7 @@ export async function deleteNomination(id: string): Promise<void> {
 
 // ── Winners ───────────────────────────────────────────────
 export async function createWinner(formData: FormData): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   const name = formData.get('name') as string;
   const department = formData.get('department') as string;
   const position = formData.get('position') as string;
@@ -198,10 +161,7 @@ export async function createWinner(formData: FormData): Promise<void> {
 }
 
 export async function deleteWinner(id: string): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.winner.delete({ where: { id } });
   revalidatePath('/admin/winners');
   revalidatePath('/');
@@ -209,10 +169,7 @@ export async function deleteWinner(id: string): Promise<void> {
 
 // ── Gallery ───────────────────────────────────────────────
 export async function createGalleryItem(formData: FormData): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   const url = formData.get('url') as string;
   const alt = (formData.get('alt') as string) || '';
   const album = (formData.get('album') as string) || '';
@@ -228,20 +185,14 @@ export async function createGalleryItem(formData: FormData): Promise<void> {
 }
 
 export async function deleteGalleryItem(id: string): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.gallery.delete({ where: { id } });
   revalidatePath('/admin/gallery');
   revalidatePath('/');
 }
 
 export async function toggleGalleryVisibility(id: string, isVisible: boolean): Promise<void> {
-<<<<<<< HEAD
   await requireAdmin();
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   await prisma.gallery.update({
     where: { id },
     data: { isVisible },
@@ -250,7 +201,6 @@ export async function toggleGalleryVisibility(id: string, isVisible: boolean): P
   revalidatePath('/');
 }
 
-<<<<<<< HEAD
 // ── Users ─────────────────────────────────────────────────
 export async function createUser(formData: FormData): Promise<void> {
   await requireAdmin();
@@ -283,10 +233,6 @@ export async function deleteUser(id: string): Promise<void> {
 // ── Site Content ──────────────────────────────────────────
 export async function updateSiteContent(formData: FormData): Promise<void> {
   await requireAdmin();
-=======
-// ── Site Content ──────────────────────────────────────────
-export async function updateSiteContent(formData: FormData): Promise<void> {
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   const keys = formData.getAll('key') as string[];
   const values = formData.getAll('value') as string[];
 

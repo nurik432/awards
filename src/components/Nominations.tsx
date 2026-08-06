@@ -1,9 +1,6 @@
 export interface NominationProp {
   id: string;
-<<<<<<< HEAD
   slug: string;
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   icon: string;
   title: string;
   description: string;
@@ -12,7 +9,6 @@ export interface NominationProp {
   steps: string[];
   googleFormUrl?: string | null;
   formType: string;
-<<<<<<< HEAD
   acceptsApplications: boolean;
 }
 
@@ -159,12 +155,6 @@ function StepsBlock({ nom }: { nom: NominationProp }) {
 function NominationCard({ nom }: { nom: NominationProp }) {
   const canApply = nom.acceptsApplications;
   const isBestEmployee = nom.title.toLowerCase().includes('сотрудник');
-=======
-}
-
-function NominationCard({ nom }: { nom: NominationProp }) {
-  const hasApplyForm = nom.formType !== 'basic' || nom.googleFormUrl;
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
   return (
     <article className="card">
@@ -173,7 +163,6 @@ function NominationCard({ nom }: { nom: NominationProp }) {
         <h3>{nom.title}</h3>
       </div>
       <p className="desc">{nom.description}</p>
-<<<<<<< HEAD
       {isBestEmployee && (
         <p className="emp-intro">
           Победитель выбирается <strong>отдельно в двух категориях</strong> по типу должности:
@@ -183,19 +172,6 @@ function NominationCard({ nom }: { nom: NominationProp }) {
       )}
 
       <EligibilityBlock nom={nom} />
-=======
-
-      {nom.eligibility.length > 0 && (
-        <div className="block">
-          <h4>Кто может участвовать</h4>
-          <ul>
-            {nom.eligibility.map((item, i) => (
-              <li key={i}><span className="dot" /><span>{item}</span></li>
-            ))}
-          </ul>
-        </div>
-      )}
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
       {nom.criteria.length > 0 && (
         <div className="block">
@@ -208,7 +184,6 @@ function NominationCard({ nom }: { nom: NominationProp }) {
         </div>
       )}
 
-<<<<<<< HEAD
       <StepsBlock nom={nom} />
 
       {canApply ? (
@@ -218,28 +193,6 @@ function NominationCard({ nom }: { nom: NominationProp }) {
           </a>
         </div>
       ) : (
-=======
-      {nom.steps.length > 0 && (
-        <div className="block">
-          <h4>Этапы участия</h4>
-          <ol>
-            {nom.steps.map((item, i) => (
-              <li key={i}><span className="num">{i + 1}</span><span>{item}</span></li>
-            ))}
-          </ol>
-        </div>
-      )}
-
-      {nom.googleFormUrl && (
-        <div className="card-actions">
-          <a className="apply-btn" href={nom.googleFormUrl} target="_blank" rel="noopener noreferrer">
-            Подать заявку
-          </a>
-        </div>
-      )}
-
-      {!hasApplyForm && (
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
         <div className="nomination-status">Победитель определяется по итогам внутреннего анализа данных</div>
       )}
     </article>

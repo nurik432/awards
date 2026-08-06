@@ -6,13 +6,8 @@ generator client {
 }
 
 datasource db {
-<<<<<<< HEAD
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-=======
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   directUrl = env("DIRECT_URL")
 }
 
@@ -25,16 +20,10 @@ model Nomination {
   criteria      String   // stored as JSON array string
   steps         String   // stored as JSON array string
   tags          String   // stored as JSON array string
-<<<<<<< HEAD
   formType             String   @default("basic") // "basic", "innovator", "manager"
   googleFormUrl        String?
   acceptsApplications  Boolean  @default(false)
   isActive             Boolean  @default(true)
-=======
-  formType      String   @default("basic") // "basic", "innovator", "manager"
-  googleFormUrl String?
-  isActive      Boolean  @default(true)
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
@@ -43,7 +32,6 @@ model Nomination {
 }
 
 model Application {
-<<<<<<< HEAD
   id            String      @id @default(cuid())
   nominationId  String
   nomination    Nomination  @relation(fields: [nominationId], references: [id], onDelete: Cascade)
@@ -74,16 +62,6 @@ model JuryScore {
   judge         User        @relation(fields: [judgeId], references: [id], onDelete: Cascade)
 
   @@unique([applicationId, judgeId])
-=======
-  id            String     @id @default(cuid())
-  nominationId  String
-  nomination    Nomination @relation(fields: [nominationId], references: [id], onDelete: Cascade)
-  employeeData  String     // JSON string: name, email, department, position, phone (basic)
-  formData      String     // JSON string: answers to nomination-specific questions
-  status        String     @default("PENDING") // "PENDING", "REVIEW", "APPROVED", "REJECTED"
-  submittedAt   DateTime   @default(now())
-  reviewNote    String?
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 }
 
 model Winner {
@@ -121,7 +99,6 @@ model SiteContent {
 }
 
 model User {
-<<<<<<< HEAD
   id           String        @id @default(cuid())
   name         String
   email        String        @unique
@@ -132,14 +109,4 @@ model User {
   createdAt    DateTime      @default(now())
   applications Application[]
   juryScores   JuryScore[]
-=======
-  id         String   @id @default(cuid())
-  name       String
-  email      String   @unique
-  password   String   
-  department String?
-  role       String   @default("EMPLOYEE") // "EMPLOYEE", "ADMIN", "JUDGE"
-  isActive   Boolean  @default(true)
-  createdAt  DateTime @default(now())
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 }

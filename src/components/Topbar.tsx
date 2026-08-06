@@ -1,6 +1,5 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-<<<<<<< HEAD
 import { useSession } from 'next-auth/react';
 
 export default function Topbar() {
@@ -20,12 +19,6 @@ export default function Topbar() {
   return (
     <div className="site-topbar">
       {/* Логотип */}
-=======
-
-export default function Topbar() {
-  return (
-    <div className="site-topbar">
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
       <div className="brand">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/image_1.png" alt="Логотип Фаровон" />
@@ -34,18 +27,14 @@ export default function Topbar() {
           <strong>Farovon Awards</strong>
         </div>
       </div>
-<<<<<<< HEAD
 
       {/* Навигация — скрыта на мобильном */}
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
       <nav className="topnav">
         <a href="#nominations">Номинации</a>
         <a href="#gallery">Галерея</a>
         <a href="#winners">Победители</a>
         <a href="#process">Процесс</a>
       </nav>
-<<<<<<< HEAD
 
       {/* Кнопка входа + hamburger */}
       <div className="topbar-end">
@@ -90,8 +79,6 @@ export default function Topbar() {
           )}
         </nav>
       )}
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
     </div>
   );
 }

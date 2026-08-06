@@ -1,10 +1,7 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { parseCSV, extractSpreadsheetId, buildCsvUrl } from '@/lib/sheets';
-<<<<<<< HEAD
 import { auth } from '@/auth';
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
 
 /**
  * POST /api/admin/sync-winners
@@ -20,15 +17,12 @@ import { auth } from '@/auth';
  *   E: Год (optional, overrides the year in body)
  */
 export async function POST(request: Request) {
-<<<<<<< HEAD
   const session = await auth();
   const role = (session?.user as any)?.role;
   if (!session || role !== 'ADMIN') {
     return NextResponse.json({ error: 'Нет доступа' }, { status: 403 });
   }
 
-=======
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   try {
     const body = await request.json();
     const { url, gid, mode, year, clearExisting } = body as {
@@ -229,12 +223,7 @@ export async function POST(request: Request) {
     });
   } catch (error: unknown) {
     console.error('Sync winners error:', error);
-<<<<<<< HEAD
     return NextResponse.json({ error: 'Ошибка синхронизации' }, { status: 500 });
-=======
-    const message = error instanceof Error ? error.message : 'Неизвестная ошибка';
-    return NextResponse.json({ error: message }, { status: 500 });
->>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
   }
 }
 
