@@ -1,0 +1,44 @@
+{
+  "name": "temp_app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:init": "npx prisma db push && npx tsx prisma/seed.ts",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.11.1",
+    "@prisma/client": "^5.22.0",
+<<<<<<< HEAD
+    "@supabase/supabase-js": "^2.45.4",
+    "bcryptjs": "^2.4.3",
+=======
+    "bcrypt": "^6.0.0",
+>>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
+    "lucide-react": "^1.7.0",
+    "next": "16.2.2",
+    "next-auth": "^5.0.0-beta.30",
+    "nodemailer": "^8.0.4",
+    "prisma": "^5.22.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+<<<<<<< HEAD
+    "@types/bcryptjs": "^2.4.6",
+=======
+    "@types/bcrypt": "^6.0.0",
+>>>>>>> ea0ea528935b3fb349231e765b4381c98866c16c
+    "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.2",
+    "typescript": "^5"
+  }
+}
