@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { parseCSV, extractSpreadsheetId, buildCsvUrl } from '@/lib/sheets';
+import { parseCSV, extractSpreadsheetId, buildCsvUrl, findColumn } from '@/lib/sheets';
 import { auth } from '@/auth';
 
 /**
@@ -225,11 +225,4 @@ export async function POST(request: Request) {
     console.error('Sync winners error:', error);
     return NextResponse.json({ error: 'Ошибка синхронизации' }, { status: 500 });
   }
-}
-
-// ── Helper: find column index by matching header keywords ──
-function findColumn(header: string[], keywords: string[]): number {
-  return header.findIndex((h) =>
-    keywords.some((kw) => h.includes(kw))
-  );
 }

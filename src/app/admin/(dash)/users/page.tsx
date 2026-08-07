@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { createUser, toggleUserActive, deleteUser } from '@/app/admin/actions';
 
@@ -46,6 +47,7 @@ export default async function AdminUsersPage() {
         <div className="adm-card">
           <div className="adm-card-head">
             <h2 className="adm-card-title">Создать пользователя</h2>
+            <Link href="/admin/users/import" className="adm-hint">Массовый импорт из Excel →</Link>
           </div>
           <div className="adm-card-body">
             <form action={createUser}>

@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
 
+const TERMINAL = ['APPROVED', 'REJECTED'];
+
 export async function POST(req: Request) {
   const session = await auth();
   const userId = (session?.user as any)?.id;
@@ -28,10 +30,17 @@ export async function POST(req: Request) {
 
     const app = await prisma.application.findUnique({
       where: { id: applicationId },
-      select: { userId: true },
+      select: { userId: true, status: true },
     });
 
     if (!app) return NextResponse.json({ error: 'Заявка не найдена' }, { status: 404 });
+
+    // A judge must not be able to change scoring after an admin already decided.
+    if (TERMINAL.includes(app.status))
+      return NextResponse.json(
+        { error: 'Заявка уже рассмотрена администратором' },
+        { status: 409 }
+      );
 
     // A judge must not score their own application.
     if (app.userId && app.userId === userId)

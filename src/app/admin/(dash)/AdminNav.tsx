@@ -10,6 +10,7 @@ const GROUPS: { label: string; items: { href: string; icon: string; label: strin
       { href: '/admin',         icon: '📋', label: 'Заявки' },
       { href: '/admin/results', icon: '📊', label: 'Результаты' },
       { href: '/admin/users',   icon: '👥', label: 'Комиссия' },
+      { href: '/admin/users/import', icon: '📥', label: 'Импорт из Excel' },
     ],
   },
   {

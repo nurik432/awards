@@ -78,3 +78,8 @@ export function extractSpreadsheetId(input: string): string | null {
 export function buildCsvUrl(spreadsheetId: string, gid: string = '0'): string {
   return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=${gid}`;
 }
+
+/** Finds a column index by matching lowercased header keywords. */
+export function findColumn(header: string[], keywords: string[]): number {
+  return header.findIndex((h) => keywords.some((kw) => h.includes(kw)));
+}
