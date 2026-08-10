@@ -32,7 +32,6 @@ export default function Topbar() {
       <nav className="topnav">
         <a href="#nominations">Номинации</a>
         <a href="#gallery">Галерея</a>
-        <a href="#winners">Победители</a>
         <a href="#process">Процесс</a>
       </nav>
 
@@ -70,7 +69,6 @@ export default function Topbar() {
         <nav className="topnav-mobile">
           <a href="#nominations" onClick={close}>Номинации</a>
           <a href="#gallery" onClick={close}>Галерея</a>
-          <a href="#winners" onClick={close}>Победители</a>
           <a href="#process" onClick={close}>Процесс</a>
           {cabinetLink && (
             <a href={cabinetLink.href} onClick={close} className="topnav-mobile-cabinet">

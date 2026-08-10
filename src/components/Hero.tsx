@@ -8,7 +8,6 @@ interface HeroProps {
   photoBadge?: string;
   btnNominations?: string;
   btnGallery?: string;
-  btnWinners?: string;
 }
 
 export default function Hero({
@@ -19,7 +18,6 @@ export default function Hero({
   photoBadge,
   btnNominations,
   btnGallery,
-  btnWinners,
 }: HeroProps) {
   return (
     <header className="hero">
@@ -41,9 +39,6 @@ export default function Hero({
               </a>
               <a className="btn btn-secondary" href="#gallery">
                 {btnGallery || 'Открыть галерею'}
-              </a>
-              <a className="btn btn-secondary" href="#winners">
-                {btnWinners || 'Победители прошлых лет'}
               </a>
             </div>
           </div>

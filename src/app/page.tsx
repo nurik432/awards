@@ -3,21 +3,16 @@ import Hero from '@/components/Hero';
 import InfoPanel from '@/components/InfoPanel';
 import Nominations from '@/components/Nominations';
 import Gallery from '@/components/Gallery';
-import WinnersArchive from '@/components/WinnersArchive';
 import Footer from '@/components/Footer';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   // Load all data from Prisma
-  const [nominations, winners, galleryItems, heroSlides, siteContent] = await Promise.all([
+  const [nominations, galleryItems, heroSlides, siteContent] = await Promise.all([
     prisma.nomination.findMany({
       where: { isActive: true },
       orderBy: { createdAt: 'asc' },
-    }),
-    prisma.winner.findMany({
-      include: { nomination: true },
-      orderBy: [{ year: 'desc' }, { name: 'asc' }],
     }),
     prisma.gallery.findMany({
       where: { isVisible: true },
@@ -55,9 +50,6 @@ export default async function Home() {
     acceptsApplications: n.acceptsApplications,
   }));
 
-  // Group winners by nomination for the archive component
-  const winnerGroups = groupWinnersByNomination(winners);
-
   // Transform gallery for component
   const galleryProps = galleryItems.map((g) => ({
     src: g.url,
@@ -77,7 +69,6 @@ export default async function Home() {
         photoBadge={sc['hero_photo_badge']}
         btnNominations={sc['hero_btn_nominations']}
         btnGallery={sc['hero_btn_gallery']}
-        btnWinners={sc['hero_btn_winners']}
       />
       <main>
         <InfoPanel cards={infoCards} />
@@ -90,12 +81,6 @@ export default async function Home() {
           items={galleryProps}
           kicker={sc['gallery_kicker']}
           title={sc['gallery_title']}
-        />
-        <WinnersArchive
-          groups={winnerGroups}
-          kicker={sc['winners_kicker']}
-          title={sc['winners_title']}
-          btnToggle={sc['winners_btn_toggle']}
         />
       </main>
       <Footer
@@ -113,34 +98,4 @@ function safeJsonParse(str: string): string[] {
   } catch {
     return [];
   }
-}
-
-function groupWinnersByNomination(
-  winners: Array<{
-    id: string;
-    name: string;
-    position: string;
-    department: string;
-    year: number;
-    nomination: { title: string; slug: string };
-  }>
-) {
-  const groups: Record<
-    string,
-    { title: string; slug: string; winners: Array<{ name: string; position: string }> }
-  > = {};
-
-  for (const w of winners) {
-    const key = w.nomination.slug;
-    if (!groups[key]) {
-      groups[key] = {
-        title: w.nomination.title,
-        slug: w.nomination.slug,
-        winners: [],
-      };
-    }
-    groups[key].winners.push({ name: w.name, position: w.position });
-  }
-
-  return Object.values(groups);
 }

@@ -16,7 +16,6 @@ const CONTENT_SECTIONS = [
       { key: 'hero_photo_badge', label: 'Плашка на фото', placeholder: 'Итоги года • церемония признания' },
       { key: 'hero_btn_nominations', label: 'Кнопка «Номинации»', placeholder: 'Смотреть номинации' },
       { key: 'hero_btn_gallery', label: 'Кнопка «Галерея»', placeholder: 'Открыть галерею' },
-      { key: 'hero_btn_winners', label: 'Кнопка «Победители»', placeholder: 'Победители прошлых лет' },
     ],
   },
   {
@@ -48,16 +47,6 @@ const CONTENT_SECTIONS = [
     fields: [
       { key: 'gallery_kicker', label: 'Подзаголовок (kicker)', placeholder: 'Галерея' },
       { key: 'gallery_title', label: 'Заголовок секции', placeholder: 'Фото с прошлых мероприятий «Итоги года»' },
-    ],
-  },
-  {
-    id: 'winners',
-    label: '🥇 Секция «Победители»',
-    description: 'Заголовок и подзаголовок блока архива победителей.',
-    fields: [
-      { key: 'winners_kicker', label: 'Подзаголовок (kicker)', placeholder: 'Архив победителей' },
-      { key: 'winners_title', label: 'Заголовок секции', placeholder: 'Победители и рекомендованные сотрудники по итогам 2025 года' },
-      { key: 'winners_btn_toggle', label: 'Кнопка показа/скрытия', placeholder: 'Показать / скрыть победителей прошлых лет' },
     ],
   },
   {
