@@ -48,6 +48,15 @@ JSON хранится как `String` в текстовых колонках (`c
 `src/lib/safe-json.ts` (`safeParseObject`/`safeParseArray`): одна битая
 запись не должна ронять весь список в админке/у жюри.
 
+Схема в прод попадает через `prisma db push` (папка `prisma/migrations` —
+наследие SQLite, не применяется). Всё, чего Prisma не описывает (RLS, права,
+бакет Storage), лежит в `supabase/migrations/*.sql`. На всех таблицах `public`
+включён RLS **без политик**, а права `anon`/`authenticated` отозваны: приложение
+не использует REST API Supabase, только Prisma под `postgres` (обходит RLS).
+Новая модель → добавить миграцию с `enable row level security` для её таблицы,
+иначе Supabase Advisor снова покажет критическую ошибку. Не добавлять политики
+для `anon` и не выдавать ему права.
+
 ## Файлы: только через Supabase Storage
 
 На Vercel файловая система эфемерна (и read-only вне `/tmp`) — **никогда не

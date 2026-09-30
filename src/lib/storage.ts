@@ -38,6 +38,17 @@ export function getStorageClient() {
   return cached;
 }
 
+/**
+ * Creates the uploads bucket as private. A concurrent creation by another
+ * instance (409) counts as success.
+ */
+async function ensureBucket(): Promise<void> {
+  const { error } = await getStorageClient().storage.createBucket(UPLOADS_BUCKET, {
+    public: false,
+  });
+  if (error && error.statusCode !== '409') throw error;
+}
+
 /** Uploads a buffer to the shared bucket at `key` and returns the storage path. */
 export async function uploadToStorage(
   key: string,
@@ -45,9 +56,17 @@ export async function uploadToStorage(
   contentType: string
 ): Promise<void> {
   const client = getStorageClient();
-  const { error } = await client.storage
-    .from(UPLOADS_BUCKET)
-    .upload(key, buffer, { contentType, upsert: false });
+  const upload = () =>
+    client.storage.from(UPLOADS_BUCKET).upload(key, buffer, { contentType, upsert: false });
+
+  let { error } = await upload();
+  // A fresh Supabase project has no buckets, and until someone creates one by
+  // hand every upload fails with "Bucket not found". Create it and retry once
+  // instead of depending on that manual step.
+  if (error?.statusCode === '404') {
+    await ensureBucket();
+    ({ error } = await upload());
+  }
   if (error) throw error;
 }
 
