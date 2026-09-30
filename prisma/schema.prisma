@@ -47,6 +47,9 @@ model Application {
   submittedAt   DateTime    @default(now())
   reviewNote    String?
   juryScores    JuryScore[]
+
+  @@index([nominationId])
+  @@index([userId])
 }
 
 model JuryScore {
@@ -62,6 +65,7 @@ model JuryScore {
   judge         User        @relation(fields: [judgeId], references: [id], onDelete: Cascade)
 
   @@unique([applicationId, judgeId])
+  @@index([judgeId])
 }
 
 model Winner {
@@ -74,6 +78,8 @@ model Winner {
   subNomination String?
   year          Int
   photo         String?
+
+  @@index([nominationId])
 }
 
 model Gallery {
